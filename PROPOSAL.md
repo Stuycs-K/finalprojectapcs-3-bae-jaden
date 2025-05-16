@@ -2,13 +2,25 @@
 
 ## Group Members:
 
-names here.(CHANGE THIS!!!!!)
+Jaden Bae
        
 # IDEAS:
 
-1 statement of the problem you are solving and/or a high level description of the project. (CHANGE THIS!!!!!)
+1. Local multiplayer split screen 4key rhythm game.
+- 2 player support (asdf, jkl;)
+- accuracy, score
+- being able to use osu mania map / song and run it through program (just need to put song / map inside data of processing)
+- being able to pick song (menu screen)
+- win screen / game loop
 
-2 statement of the problem you are solving and/or a high level description of the project. (CHANGE THIS!!!!!)
+2. Pixel painting program.
+- being able to pick color
+- pixel based canvas.
+- various shapes / tool
 
-3 statement of the problem you are solving and/or a high level description of the project. (CHANGE THIS!!!!!)
+3. chess
+- supports all special moves (en passant / castle)
+- local multiplayer (no singplayer AI!!) 
+- 2d, displays timer (10 min rapid).
+
 
