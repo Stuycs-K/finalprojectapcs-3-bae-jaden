@@ -22,7 +22,7 @@ Nice to have features:
 
 # Project Design
 
-[alt text](uml.png)
+![alt text](uml.png)
 
     
 # Intended pacing:
