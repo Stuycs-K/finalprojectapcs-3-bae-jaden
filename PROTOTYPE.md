@@ -1,21 +1,48 @@
 
 # Technical Details:
 
-(CHANGE THIS!!!!!)
+Period 3
+Jaden Bae
+OPM
 
-A description of your technical design. This should include: 
-   
-How you will be using the topics covered in class in the project.
-     
+2 Player Local split screen 4 Key rhythm game.
+
+Minimum Vaiable Product:
+- Using draw() to render each notes, in order to animate them.
+- Using player class and note class to create objects and track data.
+- Using scanner to load osu file of map / song and run it through program.
+- Using arraydeque for efficient removal / addition of notes. 
+- PVector value for note's positionto be displayed in screen.
+- Player health system (take damage when other side gets it wrong, game ends when HP drains)
+
+Nice to have features:
+- Using PImage to display images for each player's actions (key pressed).
+- Sound effects.
+
+
 # Project Design
 
-UML Diagrams and descriptions of key algorithms, classes, and how things fit together.
-
+[alt text](uml.png)
 
     
 # Intended pacing:
 
-How you are breaking down the project and who is responsible for which parts.
+Wednesday: Prototype (MVP) cont.
 
-A timeline with expected completion dates of parts of the project. (CHANGE THIS!!!!!)
+- Using draw() to render each notes, in order to animate them.
+- Using player class and note class to create objects and track data.
+- Using scanner to load osu file of map / song and run it through program.
+- Using arraydeque for efficient removal / addition of notes. 
+- PVector value for note's positionto be displayed in screen.
+
+
+Thursday: Prototype (MVP)
+
+- Player health system (take damage when other side gets it wrong, game ends when HP drains)
+
+
+Sunday:
+- Using PImage to display images for each player's actions (key pressed).
+- Sound effects.
+
 
