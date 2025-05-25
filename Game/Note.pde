@@ -6,8 +6,9 @@ public class Note {
   boolean valid = true;
   boolean hit = false;
 
-  public Note(int chosenLane, int player, int x, int y) {
+  public Note(int pickedTime, int chosenLane, int player, int x, int y){
     valid = true;
+    time = pickedTime;
     lane = chosenLane;
     position = new PVector(x + posOffset * player, y);
   }
