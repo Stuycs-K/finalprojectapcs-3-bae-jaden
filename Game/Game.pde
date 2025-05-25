@@ -9,7 +9,7 @@ Deque<int[]> noteReader = new ArrayDeque<>();
 int posOffset;
 char[] keys1 = {'a', 's', 'k', 'l'};
 char[] keys2 = {'x', 'z', ';', '\''};
-int yCurrent;
+
 int startTime;
 float musicTime = 0;
 int appearanceTime = 500;
@@ -74,10 +74,6 @@ void draw() {
   background(0);
   fill(255);
 
-  yCurrent += 5;
-  if (yCurrent > height) {
-    yCurrent = 0;
-  }
 
    if (noteReader.size() > 0){
     while (noteReader.size() > 0 && noteReader.peekFirst()[2] <= musicTime + appearanceTime){

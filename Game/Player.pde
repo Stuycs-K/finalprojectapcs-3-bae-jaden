@@ -25,14 +25,45 @@ public class Player{
     noteScore[n.returnLane()].addFirst(n);
   }
   
-  void playerScreenRender(){
-    for (Deque<Note> noteList : noteScore) {   
-    for (Note h : noteList) {
-       h.display();
-   
-      }
+ void playerScreenRender(){
     
+
+    for (Deque<Note> noteList : noteScore) {
+      ArrayList<Note> noteDeleteList = new ArrayList<Note>();
+    
+    for (Note h : noteList) {
+      if (h.returnTime() > musicTime) {
+        h.display();
+      } else if (musicTime - h.returnTime() >= 0 && appearanceTime >= musicTime - h.returnTime()) {
+        h.display();
+      } else {
+        noteDeleteList.add(h);
+      }
     }
+
+    for (Note h : noteDeleteList) {
+      noteList.remove(h);
+    }
+    
+
+
+    noteDeleteList = null;
+    }
+    
+
+    for (Note h : deleteRender){
+       h.display();
+    }  
+
+    if (deleteRender.size() > 0){     
+      while (deleteRender.peekFirst().returnValid() == false){
+        deleteRender.removeFirst();
+        if (deleteRender.size() == 0){
+         break; 
+        }
+      }     
+    }
+    
   }
   
   void keyPressed(){
@@ -52,6 +83,7 @@ public class Player{
     
     if (selectedLane != -1 && noteScore[selectedLane].size() > 0) {
       Note removed = noteScore[selectedLane].removeLast();
+      deleteRender.addLast(removed);
       removed.hit();
       
     }
