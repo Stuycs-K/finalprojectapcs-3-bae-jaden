@@ -12,7 +12,7 @@ char[] keys2 = {'x', 'z', ';', '\''};
 
 int startTime;
 float musicTime = 0;
-int appearanceTime = 500;
+int appearanceTime = 1500;
 
 
 Player[] players = {new Player(0, keys1), new Player(1, keys2)}; 
@@ -22,8 +22,8 @@ void setup() {
   posOffset = (width / 2);
   
   try {
-      File file = new File(dataPath("GameOn/map.txt"));//1
-      mapSound = new SoundFile(this, "GameOn/audio.mp3");
+      File file = new File(dataPath("DriveRealFast/map.txt"));//1
+      mapSound = new SoundFile(this, "DriveRealFast/audio.mp3");
       Scanner input = new Scanner(file);
 
       boolean reached = false;
@@ -37,21 +37,17 @@ void setup() {
         
         if (reached){
           String[] data = line.split(",");
-          int[] packed = {64, 0, 0, 1};
-          for (int i = 0; i < 4; i++){
-            if (i == 2) { 
-              packed[i] = Math.round(parseFloat(data[i]));
-            } else if (i == 0) { 
-              packed[i] = Math.round(parseFloat(data[i]) * (960.0 / 512.0));
-            } else if (i == 1) { 
-              packed[i] = Math.round(parseFloat(data[i]) * (1080.0 / 384.0));
-            } else {
-              packed[i] = parseInt(data[i]);
-            }
+          
+          int[] packed = {64, 0}; //time , type
+          packed[0] = Math.round(parseFloat(data[2]));
+          if(data[5].equals("L")){
+           packed[1] = 1; 
+          }else{
+            packed[1] = 0;
           }
           noteReader.addLast(packed);
         
-      }
+        }
         
         
       }
@@ -76,21 +72,11 @@ void draw() {
 
 
    if (noteReader.size() > 0){
-    while (noteReader.size() > 0 && noteReader.peekFirst()[2] <= musicTime + appearanceTime){
+    while (noteReader.size() > 0 && noteReader.peekFirst()[0] <= musicTime + appearanceTime){
       int[] data = noteReader.removeFirst();
-      int lane = 0;
-      if (data[0] > 0 && data[0] <= Math.round(parseFloat(127) * (960.0 / 512.0))){
-        lane = 0;
-      }else if (data[0] > Math.round(parseFloat(127) * (960.0 / 512.0)) && data[0] <= Math.round(parseFloat(255) * (960.0 / 512.0))){
-        lane = 1;
-      }else if (data[0] > Math.round(parseFloat(255) * (960.0 / 512.0)) && data[0] <= Math.round(parseFloat(383) * (960.0 / 512.0))){
-        lane = 2;
-      }else if (data[0] > Math.round(parseFloat(383) * (960.0 / 512.0)) && data[0] <= Math.round(parseFloat(511) * (960.0 / 512.0))){
-        lane = 3;
-      }
       
       for (int i = 0; i < players.length; i++){
-        players[i].addNote(new Note(data[2], lane, i, data[0], data[1]));
+        players[i].addNote(new Note(i, data[0], data[1]));
       }
     }
   }

@@ -1,40 +1,42 @@
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-
 public class Player{
-  Deque<Note>[] noteScore = (Deque<Note>[]) new Deque[4];
+  Deque<Note> noteScore = new ArrayDeque<>();
   int player;
   int score = 0;
   Deque<Note> deleteRender = new ArrayDeque<>();
   
+    
+  boolean Pressed0 = false;
+  boolean Pressed1 = false;
+  boolean Pressed2 = false;
+  boolean Pressed3 = false;
   char[] keys = {'a','s','d','f'};
     
   public Player(int num, char[] chosenkey){
     player = num;
-    noteScore[0] = new ArrayDeque<>();
-    noteScore[1] = new ArrayDeque<>();
-    noteScore[2] = new ArrayDeque<>();
-    noteScore[3] = new ArrayDeque<>();
     keys = chosenkey;
     
   }
   
   
   void addNote(Note n){
-    noteScore[n.returnLane()].addFirst(n);
+    noteScore.addFirst(n);
   }
   
  void playerScreenRender(){
-    
+    noFill();
+    stroke(255);
+    strokeWeight(2); 
+    circle((int) (width/2 + (100 * Math.pow(-1, player + 1))), height - 300, 100);
 
-    for (Deque<Note> noteList : noteScore) {
-      ArrayList<Note> noteDeleteList = new ArrayList<Note>();
+    ArrayList<Note> noteDeleteList = new ArrayList<Note>();
     
-    for (Note h : noteList) {
-      if (h.returnTime() > musicTime) {
+    for (Note h : noteScore) {
+      if (h.time > musicTime) {
         h.display();
-      } else if (musicTime - h.returnTime() >= 0 && appearanceTime >= musicTime - h.returnTime()) {
+      } else if (musicTime - h.time  >= 0 && appearanceTime >= musicTime -h.time ) {
         h.display();
       } else {
         noteDeleteList.add(h);
@@ -42,13 +44,10 @@ public class Player{
     }
 
     for (Note h : noteDeleteList) {
-      noteList.remove(h);
+      noteScore.remove(h);
     }
     
-
-
     noteDeleteList = null;
-    }
     
 
     for (Note h : deleteRender){
@@ -68,21 +67,22 @@ public class Player{
   
   void keyPressed(){
     int selectedLane = -1;
-  
     if (key == keys[0]) {
-      selectedLane = 0;
+      Pressed0 = true;
     } else if (key == keys[1]) {
-      selectedLane = 1;
+      selectedLane = 0;
+      Pressed1 = true;
     } else if (key == keys[2]) {
-      selectedLane = 2;
+      selectedLane = 0;
+      Pressed2 = true;
     } else if (key == keys[3]) {
-      selectedLane = 3;
+      Pressed3 = true;
     } else{
      return; 
     }
     
-    if (selectedLane != -1 && noteScore[selectedLane].size() > 0) {
-      Note removed = noteScore[selectedLane].removeLast();
+    if (selectedLane != -1 && noteScore.size() > 0) {
+      Note removed = noteScore.removeLast();
       deleteRender.addLast(removed);
       removed.hit();
       

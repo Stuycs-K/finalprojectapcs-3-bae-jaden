@@ -1,11 +1,16 @@
 public class Note{
  PVector position;
- float finalRadius = 100;
- float startRadius = 500;
  int lane;
  int time;
  boolean valid = true;
  boolean hit = false;
+ boolean isLong;
+ int longNoteStack;
+ int owner;
+ 
+ float startY = -100;        
+ float endY = height - 300;
+ float speed = endY - startY;
  
  boolean returnValid(){
   return (valid); 
@@ -14,19 +19,19 @@ public class Note{
  void hit(){
   hit = true; 
  }
- int returnTime(){
-  return (time); 
- }  
- 
- int returnLane(){
-   return (lane);
- }  
- 
- public Note(int pickedTime, int chosenlane, int player, int x, int y) {
+
+ public Note(int player, int pickedTime, int type) {
+   owner = player;
    valid = true;
    time = pickedTime;
-   lane = chosenlane;
-   position = new PVector(x + posOffset * player, y);
+   if (type == 0){
+     isLong = true;
+     longNoteStack = 0;
+   }else{
+     isLong = false;
+   }
+   
+   position = new PVector((int) (width/2 + (100 * Math.pow(-1, player + 1))), startY);
   }
   
   
@@ -34,12 +39,12 @@ public class Note{
    float t;
    color chosenColor;
    float alpha;
+   
    if (!hit){
-     t = constrain((float)(musicTime - (time - appearanceTime)) / appearanceTime, 0, 1);
-     alpha = constrain(lerp(0, 255, t) * 2, 0, 255);
-     
+     t = (float)(musicTime - (time - appearanceTime)) / appearanceTime;
+     alpha = 255;
    }else{
-     t = constrain((float)(musicTime - time) / (appearanceTime * 0.5), 0, 1);
+     t = constrain((float)(musicTime - time) / (appearanceTime * 0.05), 0, 1);
      alpha = constrain(lerp(255, 0, t), 0, 255);
      
    }
@@ -57,25 +62,23 @@ public class Note{
    fill(chosenColor);
    
    if (!hit){
+     if (t <= 1){
+       position.y = lerp(startY, endY, t);
+     }else{
+       position.y = endY + speed * (t-1);
+     }
      stroke(255,255,255,alpha);
      strokeWeight(12);
-     circle(position.x, position.y, finalRadius);
      
-     
-     float radius = lerp(startRadius, finalRadius, t);
-    
-     noFill();
-     stroke(chosenColor);
-     strokeWeight(4);
-     circle(position.x, position.y, radius);
+     circle(position.x, position.y, 100);
      
    }else{
      stroke(255,255,255,alpha);
      strokeWeight(12);
-     float radius = lerp(finalRadius, (startRadius - (startRadius - finalRadius) / 1.5), t);
+     float radius = lerp(100, 150, t);
      circle(position.x, position.y, radius); 
      
-     if (t == 1){
+     if (t >= 1){
       valid = false; 
      }
    }
