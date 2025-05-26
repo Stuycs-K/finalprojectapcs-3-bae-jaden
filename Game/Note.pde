@@ -2,8 +2,9 @@ public class Note{
  PVector position;
  int lane;
  int time;
- boolean valid = true;
+ boolean valid;
  boolean hit = false;
+ boolean dead = false;
  boolean isLong;
  int longNoteStack;
  int owner;
@@ -22,7 +23,7 @@ public class Note{
 
  public Note(int player, int pickedTime, int type) {
    owner = player;
-   valid = true;
+   valid = false;
    time = pickedTime;
    if (type == 0){
      isLong = true;
@@ -39,6 +40,13 @@ public class Note{
    float t;
    color chosenColor;
    float alpha;
+   
+   if (abs(time - musicTime) <= validTime){
+     valid = true;
+   }else{
+     valid = false;
+   }
+   
    
    if (!hit){
      t = (float)(musicTime - (time - appearanceTime)) / appearanceTime;
@@ -79,7 +87,7 @@ public class Note{
      circle(position.x, position.y, radius); 
      
      if (t >= 1){
-      valid = false; 
+      dead = true;
      }
    }
    

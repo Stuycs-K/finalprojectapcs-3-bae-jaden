@@ -7,13 +7,13 @@ import java.io.FileNotFoundException;
 SoundFile mapSound;
 Deque<int[]> noteReader = new ArrayDeque<>();
 int posOffset;
-char[] keys1 = {'a', 's', 'k', 'l'};
-char[] keys2 = {'x', 'z', ';', '\''};
+char[] keys1 = {'a', 's', 'd', 'f'};
+char[] keys2 = {'k', 'l', ';', '\''};
 
 int startTime;
 float musicTime = 0;
 int appearanceTime = 1500;
-
+int validTime = 200;
 
 Player[] players = {new Player(0, keys1), new Player(1, keys2)}; 
 

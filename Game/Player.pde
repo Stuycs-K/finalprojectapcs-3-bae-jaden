@@ -82,9 +82,27 @@ public class Player{
     }
     
     if (selectedLane != -1 && noteScore.size() > 0) {
-      Note removed = noteScore.removeLast();
-      deleteRender.addLast(removed);
-      removed.hit();
+      ArrayList<Note> noteTempList = new ArrayList<Note>();
+      
+      while (noteScore.size() > 0 && !noteScore.peekLast().valid){
+        noteTempList.add(noteScore.removeLast());
+      }
+      
+      if (noteScore.size() == 0){
+        println("no valid notes!");
+      }else{
+        Note removed = noteScore.removeLast();
+        deleteRender.addLast(removed);
+        removed.hit();
+      }
+      
+      for (Note j : noteTempList){
+        if (!j.dead){
+           noteScore.addLast(j);
+        }
+          
+      }
+
       
     }
   }
