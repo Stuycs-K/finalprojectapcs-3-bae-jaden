@@ -4,7 +4,16 @@ This document must be updated daily every time you finish a work session.
 
 ## Jaden Bae
 
-### 2024-05-25 - Brief description
+### 2024-05-26 - Changing to single lane style / adding pvp methods
+2 Hour in MVP branch
+- Changing 4 key to single lane style, both center keys supporting hit, top to down, got rid of split screen
+
+2 Hour in MVP branch
+- Addition of vulnerability / miss / attack system
+- Prototype layout for pvp 
+
+
+### 2024-05-25 - Basic 4 key development
 
 1 Hour in MVP branch
 - Osu file reader support (map file)
