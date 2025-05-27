@@ -80,6 +80,7 @@ public class Note{
      if(musicTime > time + validTime && missed == false && players[owner].guard == false){
         missed = true;
         players[owner].vulnerable = true;
+        players[owner].fakeOut = false;
         players[owner].lastVulnerable = (int)musicTime;
      }
      

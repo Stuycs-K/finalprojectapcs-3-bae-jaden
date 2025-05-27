@@ -12,6 +12,10 @@ public class Player{
   boolean guard = false;
   int lastGuard;
   
+  boolean fakeOut = false;
+  int lastFakeOut;
+  
+  ArrayList<Note> noteDeleteList = new ArrayList<Note>();
   Deque<Note> deleteRender = new ArrayDeque<>();
   
   boolean Pressed0 = false;
@@ -26,6 +30,13 @@ public class Player{
     
   }
   
+  void fakeOut(){
+    if (vulnerable == false && musicTime > lastFakeOut + tickInterval){
+      fakeOut = true;
+      lastFakeOut = (int)musicTime;
+    }
+  }
+  
   void capture(){
     if (players[(player + 1) % 2].vulnerable == true){
       players[(player + 1) % 2].vulnerable = false;
@@ -33,6 +44,9 @@ public class Player{
       guard = true;
       lastGuard = (int) musicTime;
       currentPosScore += Math.pow(-1, player);
+    }else if (players[(player + 1) % 2].fakeOut == true){
+      players[(player + 1) % 2].fakeOut = false;
+      currentPosScore += Math.pow(-1, (player + 1) % 2);
     }else{
       vulnerable = true;
       lastVulnerable = (int) musicTime;
@@ -50,15 +64,21 @@ public class Player{
      vulnerable = false;
    }
    
+   if (musicTime > lastFakeOut + tickInterval){
+     fakeOut = false;
+   }
+   
    if (musicTime > lastGuard + tickInterval){
      guard = false;
    }
    
-   if (vulnerable){
-     fill(255, 0, 0);
-   }else{
-     fill(255);
-   }
+  if (fakeOut){
+    fill(255, 73, 28); 
+  }else if (vulnerable){
+    fill(255, 0, 0); 
+  }else{
+    fill(255); 
+  }
    
    
    rectMode(CENTER);
@@ -70,9 +90,6 @@ public class Player{
     stroke(255);
     strokeWeight(2); 
     circle((int) (width/2 + (100 * Math.pow(-1, player + 1))), height - 300, 100);
-
-    ArrayList<Note> noteDeleteList = new ArrayList<Note>();
-    
     for (Note h : noteScore) {
       if (h.time > musicTime) {
         h.display();
@@ -87,7 +104,7 @@ public class Player{
       noteScore.remove(h);
     }
     
-    noteDeleteList = null;
+    noteDeleteList.clear();
     
 
     for (Note h : deleteRender){
@@ -131,7 +148,7 @@ public class Player{
       if (noteScore.size() == 0){
         println("no valid notes!");
       }else{
-        metronomeTick.play();
+        //metronomeTick.play();
         Note removed = noteScore.removeLast();
         deleteRender.addLast(removed);
         removed.hit();
@@ -147,13 +164,17 @@ public class Player{
       
     }else if (Pressed0 || Pressed3){
       if (player == 0){
-        if (Pressed3 == true){
+        if (key == keys[3]){
           capture();
+        }else{
+          fakeOut();
         }
       
       }else{
-        if (Pressed0 == true){
+        if (key == keys[0]){
           capture();
+        }else{
+          fakeOut();
         }
       }
     }

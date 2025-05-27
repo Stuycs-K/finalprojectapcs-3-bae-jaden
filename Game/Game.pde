@@ -24,7 +24,7 @@ int currentPosScore = 0;
 Player[] players = {new Player(0, keys1), new Player(1, keys2)}; 
 
 void setup() {
-  size(1920, 1080);
+  size(1920, 1080, P2D);
   posOffset = (width / 2);
   
   try {
@@ -95,9 +95,10 @@ void draw() {
   
     
   //screenBackground
-  textSize(20);
+  textAlign(CENTER);
   for (int i = -2; i < 3; i++){
     int position = currentPosScore + i;
+    textSize(abs(position) * 4 + 15);
     text(position, (width/ 10)+ (i + 2)* (width / 5), 800); 
   }
   
