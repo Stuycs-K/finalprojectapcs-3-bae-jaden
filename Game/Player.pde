@@ -148,7 +148,7 @@ public class Player{
       if (noteScore.size() == 0){
         println("no valid notes!");
       }else{
-        //metronomeTick.play();
+        metronomeTick.play();
         Note removed = noteScore.removeLast();
         deleteRender.addLast(removed);
         removed.hit();

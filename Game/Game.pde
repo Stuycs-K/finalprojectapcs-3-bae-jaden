@@ -20,7 +20,11 @@ int BPM;
 int lastMetronomeTick = 0;
 int preSongCount = 0;
 int currentPosScore = 0;
+
 boolean gameEnd;
+boolean gameActive;
+boolean gameSetUpDone;
+MainMenu menuscreen;
 
 Player[] players = {new Player(0, keys1), new Player(1, keys2)}; 
 
@@ -28,9 +32,15 @@ void setup() {
   size(1920, 1080, P2D);
   posOffset = (width / 2);
   gameEnd = false;
-  try {
-      File file = new File(dataPath("DriveRealFast/map.txt"));//1
-      mapSound = new SoundFile(this, "DriveRealFast/audio.mp3");
+  gameActive = false;
+  menuscreen = new MainMenu();  
+}
+
+
+void loadGame(){
+    try {
+      File file = new File(dataPath(menuscreen.ChosenSong[1]));
+      mapSound = new SoundFile(this, menuscreen.ChosenSong[2]);
       metronomeTick = new SoundFile(this, "metronomeTick.mp3");
       Scanner input = new Scanner(file);
 
@@ -74,11 +84,20 @@ void setup() {
       //File not found what should you do?
       System.out.println("File not found");
       return; //you can return from a void function just don't put a value.
-    }
-    
+    }  
 }
 
 void draw() {
+  //guard for menu screen
+  if (gameActive == false){
+    menuscreen.screenRenderMenu();
+    return;
+  }else if (gameActive == true && gameSetUpDone == false){
+    loadGame();
+    gameSetUpDone = true;
+    return;
+  }
+  
   musicTime = millis() - startTime;
   
   background(0);
@@ -131,6 +150,10 @@ void draw() {
 }
 
 void keyPressed() {
+  if (gameActive == false){
+    menuscreen.keyPressed();
+    return;
+  }
   for (Player p : players) {
     p.keyPressed();
   }
