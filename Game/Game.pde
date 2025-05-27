@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 
 SoundFile mapSound;
 SoundFile metronomeTick;
-Deque<int[]> noteReader = new ArrayDeque<>();
+Deque<int[]> noteReader;
 int posOffset;
 char[] keys1 = {'a', 's', 'd', 'g'};
 char[] keys2 = {'k', 'l', ';', '\''};
@@ -21,12 +21,15 @@ int lastMetronomeTick = 0;
 int preSongCount = 0;
 int currentPosScore = 0;
 
+int intermissionTimerMax = 60;
+int intermissionTimer = intermissionTimerMax;
+
 boolean gameEnd;
 boolean gameActive;
 boolean gameSetUpDone;
 MainMenu menuscreen;
 
-Player[] players = {new Player(0, keys1), new Player(1, keys2)}; 
+Player[] players; 
 
 void setup() {
   size(1920, 1080, P2D);
@@ -36,8 +39,26 @@ void setup() {
   menuscreen = new MainMenu();  
 }
 
-
+void cleanUp(){
+  gameActive = false;
+  gameSetUpDone = false;
+  intermissionTimer = intermissionTimerMax;
+  startTime = 0;
+  musicTime = 0;
+  lastMetronomeTick = 0;
+  preSongCount = 0;
+  currentPosScore = 0;
+  
+  if (mapSound != null && mapSound.isPlaying()) {
+    mapSound.stop();
+  }
+  noteReader = null;
+  players = null;
+}
 void loadGame(){
+  gameEnd = false;
+  players = new Player[] {new Player(0, keys1), new Player(1, keys2)}; 
+  noteReader = new ArrayDeque<>();
     try {
       File file = new File(dataPath(menuscreen.ChosenSong[1]));
       mapSound = new SoundFile(this, menuscreen.ChosenSong[2]);
@@ -95,7 +116,6 @@ void draw() {
   }else if (gameActive == true && gameSetUpDone == false){
     loadGame();
     gameSetUpDone = true;
-    return;
   }
   
   musicTime = millis() - startTime;
@@ -108,6 +128,11 @@ void draw() {
   }
   
   if (gameEnd){
+    if (intermissionTimer < 0){
+      cleanUp();
+    }
+    
+    intermissionTimer --;
     textSize(40);
     String winMessage;
     if (currentPosScore == 0){
