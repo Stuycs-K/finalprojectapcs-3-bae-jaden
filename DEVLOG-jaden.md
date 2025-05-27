@@ -4,6 +4,11 @@ This document must be updated daily every time you finish a work session.
 
 ## Jaden Bae
 
+### 2024-05-26 - Main menu / game loop
+1 hour in MVP branch
+- Music Picker Menu prototype
+- Game ends / go back to menu
+
 ### 2024-05-26 - Changing to single lane style / adding pvp methods
 2 Hour in MVP branch
 - Changing 4 key to single lane style, both center keys supporting hit, top to down, got rid of split screen
