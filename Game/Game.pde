@@ -5,15 +5,21 @@ import java.util.Deque;
 import java.io.FileNotFoundException;
 
 SoundFile mapSound;
+SoundFile metronomeTick;
 Deque<int[]> noteReader = new ArrayDeque<>();
 int posOffset;
-char[] keys1 = {'a', 's', 'd', 'f'};
+char[] keys1 = {'a', 's', 'd', 'g'};
 char[] keys2 = {'k', 'l', ';', '\''};
 
 int startTime;
 float musicTime = 0;
 int appearanceTime = 1500;
-int validTime = 200;
+int validTime = 150;
+int tickInterval;
+int BPM;
+int lastMetronomeTick = 0;
+int preSongCount = 0;
+int currentPosScore = 0;
 
 Player[] players = {new Player(0, keys1), new Player(1, keys2)}; 
 
@@ -24,11 +30,18 @@ void setup() {
   try {
       File file = new File(dataPath("DriveRealFast/map.txt"));//1
       mapSound = new SoundFile(this, "DriveRealFast/audio.mp3");
+      metronomeTick = new SoundFile(this, "metronomeTick.mp3");
       Scanner input = new Scanner(file);
 
       boolean reached = false;
       while(input.hasNextLine()){
         String line = input.nextLine();
+        if (line.equals("[TimingPoints]")){
+          String[] timingData = input.nextLine().split(",");
+          tickInterval = parseInt(timingData[1]);
+          BPM = Math.round(60000 / parseFloat(timingData[1]));
+        }
+        
         
         if (line.equals("[HitObjects]")){
           reached = true;
@@ -69,8 +82,7 @@ void draw() {
   
   background(0);
   fill(255);
-
-
+  
    if (noteReader.size() > 0){
     while (noteReader.size() > 0 && noteReader.peekFirst()[0] <= musicTime + appearanceTime){
       int[] data = noteReader.removeFirst();
@@ -80,9 +92,18 @@ void draw() {
       }
     }
   }
-
+  
+    
+  //screenBackground
+  textSize(20);
+  for (int i = -2; i < 3; i++){
+    int position = currentPosScore + i;
+    text(position, (width/ 10)+ (i + 2)* (width / 5), 800); 
+  }
+  
   for (int i = 0; i < players.length; i++) {
-    players[i].playerScreenRender();
+    players[i].playerCharRender();
+    players[i].playerNoteRender();
   }
 
 }

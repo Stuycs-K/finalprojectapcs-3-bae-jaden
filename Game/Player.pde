@@ -5,9 +5,15 @@ public class Player{
   Deque<Note> noteScore = new ArrayDeque<>();
   int player;
   int score = 0;
+  
+  boolean vulnerable = false;
+  int lastVulnerable;
+  
+  boolean guard = false;
+  int lastGuard;
+  
   Deque<Note> deleteRender = new ArrayDeque<>();
   
-    
   boolean Pressed0 = false;
   boolean Pressed1 = false;
   boolean Pressed2 = false;
@@ -20,12 +26,46 @@ public class Player{
     
   }
   
+  void capture(){
+    if (players[(player + 1) % 2].vulnerable == true){
+      players[(player + 1) % 2].vulnerable = false;
+      vulnerable = false;
+      guard = true;
+      lastGuard = (int) musicTime;
+      currentPosScore += Math.pow(-1, player);
+    }else{
+      vulnerable = true;
+      lastVulnerable = (int) musicTime;
+    }
+  }
   
   void addNote(Note n){
     noteScore.addFirst(n);
   }
-  
- void playerScreenRender(){
+ 
+ void playerCharRender(){
+   noStroke();
+   
+   if (musicTime > lastVulnerable + tickInterval){
+     vulnerable = false;
+   }
+   
+   if (musicTime > lastGuard + tickInterval){
+     guard = false;
+   }
+   
+   if (vulnerable){
+     fill(255, 0, 0);
+   }else{
+     fill(255);
+   }
+   
+   
+   rectMode(CENTER);
+   rect((int) (width/2 + (300 * Math.pow(-1, player + 1))), height / 2, 100, 200);
+ }
+ 
+ void playerNoteRender(){
     noFill();
     stroke(255);
     strokeWeight(2); 
@@ -91,6 +131,7 @@ public class Player{
       if (noteScore.size() == 0){
         println("no valid notes!");
       }else{
+        metronomeTick.play();
         Note removed = noteScore.removeLast();
         deleteRender.addLast(removed);
         removed.hit();
@@ -104,6 +145,17 @@ public class Player{
       }
 
       
+    }else if (Pressed0 || Pressed3){
+      if (player == 0){
+        if (Pressed3 == true){
+          capture();
+        }
+      
+      }else{
+        if (Pressed0 == true){
+          capture();
+        }
+      }
     }
   }
 }

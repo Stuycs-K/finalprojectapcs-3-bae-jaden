@@ -5,6 +5,7 @@ public class Note{
  boolean valid;
  boolean hit = false;
  boolean dead = false;
+ boolean missed = false;
  boolean isLong;
  int longNoteStack;
  int owner;
@@ -75,6 +76,13 @@ public class Note{
      }else{
        position.y = endY + speed * (t-1);
      }
+     
+     if(musicTime > time + validTime && missed == false && players[owner].guard == false){
+        missed = true;
+        players[owner].vulnerable = true;
+        players[owner].lastVulnerable = (int)musicTime;
+     }
+     
      stroke(255,255,255,alpha);
      strokeWeight(12);
      
@@ -85,6 +93,11 @@ public class Note{
      strokeWeight(12);
      float radius = lerp(100, 150, t);
      circle(position.x, position.y, radius); 
+     
+     
+     if(musicTime > time + validTime && players[owner].vulnerable == true){
+        players[owner].vulnerable = false;
+     }
      
      if (t >= 1){
       dead = true;
