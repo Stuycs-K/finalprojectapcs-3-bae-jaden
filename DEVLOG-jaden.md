@@ -10,7 +10,10 @@ This document must be updated daily every time you finish a work session.
 
 2 Hour in MVP branch
 - Addition of vulnerability / miss / attack system
-- Prototype layout for pvp 
+- Prototype layout for pvp
+
+30 Min in MVP branch
+- Fake out system, bit of optimization P2D
 
 
 ### 2024-05-25 - Basic 4 key development
