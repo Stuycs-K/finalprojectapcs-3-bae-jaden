@@ -20,13 +20,14 @@ int BPM;
 int lastMetronomeTick = 0;
 int preSongCount = 0;
 int currentPosScore = 0;
+boolean gameEnd;
 
 Player[] players = {new Player(0, keys1), new Player(1, keys2)}; 
 
 void setup() {
   size(1920, 1080, P2D);
   posOffset = (width / 2);
-  
+  gameEnd = false;
   try {
       File file = new File(dataPath("DriveRealFast/map.txt"));//1
       mapSound = new SoundFile(this, "DriveRealFast/audio.mp3");
@@ -83,6 +84,26 @@ void draw() {
   background(0);
   fill(255);
   
+  if (currentPosScore > 9 || currentPosScore < -9 || !mapSound.isPlaying()){
+    gameEnd = true;
+  }
+  
+  if (gameEnd){
+    textSize(40);
+    String winMessage;
+    if (currentPosScore == 0){
+      winMessage = "Tie!";
+    }else if (currentPosScore > 0){
+      winMessage = "Player 1 has won by score of "+currentPosScore;
+    }else{
+      winMessage = "Player 0 has won by score of "+currentPosScore;
+    }
+    
+    text(winMessage, width/2, height/2); 
+    return;
+  }
+  
+
    if (noteReader.size() > 0){
     while (noteReader.size() > 0 && noteReader.peekFirst()[0] <= musicTime + appearanceTime){
       int[] data = noteReader.removeFirst();
