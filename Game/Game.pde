@@ -13,7 +13,7 @@ char[] keys2 = {'k', 'l', ';', '\''};
 
 int startTime;
 float musicTime = 0;
-int appearanceTime = 1500;
+int appearanceTime;
 int validTime = 150;
 int tickInterval;
 int BPM;
@@ -72,6 +72,8 @@ void loadGame(){
           String[] timingData = input.nextLine().split(",");
           tickInterval = parseInt(timingData[1]);
           BPM = Math.round(60000 / parseFloat(timingData[1]));
+          println(tickInterval, BPM);  
+          appearanceTime = tickInterval * 3;
         }
         
         
@@ -83,10 +85,11 @@ void loadGame(){
         if (reached){
           String[] data = line.split(",");
           
-          int[] packed = {64, 0}; //time , type
+          int[] packed = {64, 0, -1}; //time , type
           packed[0] = Math.round(parseFloat(data[2]));
-          if(data[5].equals("L")){
+          if(data[5].substring(0,1).equals("L")){
            packed[1] = 1; 
+           packed[2] = parseInt(data[7]);
           }else{
             packed[1] = 0;
           }
@@ -153,7 +156,7 @@ void draw() {
       int[] data = noteReader.removeFirst();
       
       for (int i = 0; i < players.length; i++){
-        players[i].addNote(new Note(i, data[0], data[1]));
+        players[i].addNote(new Note(i, data[0], data[1], data[2]));
       }
     }
   }

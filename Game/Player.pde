@@ -112,7 +112,7 @@ public class Player{
     }  
 
     if (deleteRender.size() > 0){     
-      while (deleteRender.peekFirst().returnValid() == false){
+      while (deleteRender.peekFirst().dead  == true){
         deleteRender.removeFirst();
         if (deleteRender.size() == 0){
          break; 
@@ -149,9 +149,12 @@ public class Player{
         println("no valid notes!");
       }else{
         metronomeTick.play();
-        Note removed = noteScore.removeLast();
-        deleteRender.addLast(removed);
-        removed.hit();
+        if (noteScore.peekLast().hit() && !noteScore.peekLast().isLong){
+          Note removed = noteScore.removeLast();
+          deleteRender.addLast(removed);
+        }
+
+        
       }
       
       for (Note j : noteTempList){

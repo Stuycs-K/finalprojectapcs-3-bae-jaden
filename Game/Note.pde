@@ -6,10 +6,18 @@ public class Note{
  boolean hit = false;
  boolean dead = false;
  boolean missed = false;
+ 
  boolean isLong;
+ boolean longNoteActive = false;
+ int longNoteduration;
+ float tailY;
+ float tailStartY;
+ int tailStartTime;
+ float tailProgress;
+ float offset;
  int longNoteStack;
  int owner;
- 
+
  float startY = -100;        
  float endY = height - 300;
  float speed = endY - startY;
@@ -18,35 +26,57 @@ public class Note{
   return (valid); 
  }
  
- void hit(){
+ boolean hit(){
+  if (isLong){
+    if (!longNoteActive){
+     hit = true; 
+     tailY = endY - offset;
+     longNoteActive = true;
+     tailStartTime = (int) musicTime;
+     tailStartY = position.y - offset;
+     return false;
+      
+    }else{
+     longNoteStack ++;
+     println("longNoteStack");
+     return false;
+      
+    }
+  }
+  
   hit = true; 
+  return true;
  }
 
- public Note(int player, int pickedTime, int type) {
+ public Note(int player, int pickedTime, int type, int len) {
    owner = player;
    valid = false;
    time = pickedTime;
+   position = new PVector((int) (width/2 + (100 * Math.pow(-1, player + 1))), startY);
+   
    if (type == 0){
+     isLong = false;
+   }else{
      isLong = true;
      longNoteStack = 0;
-   }else{
-     isLong = false;
+     longNoteduration = len;
+     offset = longNoteduration * ((endY - startY) / appearanceTime);
+     tailY = position.y - offset;
    }
-   
-   position = new PVector((int) (width/2 + (100 * Math.pow(-1, player + 1))), startY);
   }
   
   
  void display(){
    float t;
    color chosenColor;
-   float alpha;
+   float alpha = 255;
    
-   if (abs(time - musicTime) <= validTime){
-     valid = true;
-   }else{
-     valid = false;
+   if (isLong){
+     valid = (musicTime >= time - validTime) && (musicTime <= time + longNoteduration);
+   }else{  
+     valid = abs(time - musicTime) <= validTime;
    }
+
    
    
    if (!hit){
@@ -54,7 +84,9 @@ public class Note{
      alpha = 255;
    }else{
      t = constrain((float)(musicTime - time) / (appearanceTime * 0.05), 0, 1);
-     alpha = constrain(lerp(255, 0, t), 0, 255);
+     if (!isLong){
+        alpha = constrain(lerp(255, 0, t), 0, 255);
+     }
      
    }
    
@@ -83,26 +115,56 @@ public class Note{
         players[owner].fakeOut = false;
         players[owner].lastVulnerable = (int)musicTime;
      }
-     
+     tailY = position.y - offset;
      stroke(255,255,255,alpha);
-     strokeWeight(12);
      
+     if(isLong){
+       strokeWeight(100);
+       line(position.x, position.y, position.x, tailY);
+       strokeWeight(12);
+       circle(position.x, position.y - offset, 100); 
+     }
+     
+     strokeWeight(12);
      circle(position.x, position.y, 100);
      
    }else{
+     
      stroke(255,255,255,alpha);
      strokeWeight(12);
      float radius = lerp(100, 150, t);
-     circle(position.x, position.y, radius); 
+     
+     if (isLong){
+       strokeWeight(100);
+       tailProgress = constrain((musicTime - time) / (float)longNoteduration, 0, 1);
+       tailY = lerp(tailStartY, position.y, tailProgress);
+       
+       line(position.x, position.y, position.x, tailY);
+       strokeWeight(12);
+       circle(position.x, tailY, 100); 
+         circle(position.x, endY, 125); 
+     }else{
+       circle(position.x, position.y, radius); 
+       
+     }
+     
      
      
      if(musicTime > time + validTime && players[owner].vulnerable == true){
         players[owner].vulnerable = false;
      }
      
-     if (t >= 1){
-      dead = true;
+     if (isLong){
+       if (tailProgress >= 1){
+         dead = true;
+       }
+     }else{
+       if (t >= 1){
+        dead = true;
+       }
      }
+     
+
    }
    
  }
