@@ -7,6 +7,7 @@ This document must be updated daily every time you finish a work session.
 ### 2024-05-27 - Main menu / game loop
 2 Hour in MVP branch
 - Long note type for note class implementation
+
 2 Hour in MVP branch
 - New character class
 - Image display, moving some of player variables to be controlled inside character
