@@ -32,7 +32,9 @@ MainMenu menuscreen;
 Player[] players; 
 
 void setup() {
+  
   size(1920, 1080, P2D);
+  fullScreen();
   posOffset = (width / 2);
   gameEnd = false;
   gameActive = false;
@@ -74,6 +76,7 @@ void loadGame(){
           BPM = Math.round(60000 / parseFloat(timingData[1]));
           println(tickInterval, BPM);  
           appearanceTime = tickInterval * 3;
+          validTime = appearanceTime / 5;
         }
         
         

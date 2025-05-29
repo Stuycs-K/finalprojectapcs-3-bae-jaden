@@ -34,8 +34,9 @@ public class Player{
   
   void fakeOut(){
     if (vulnerable == false && musicTime > lastFakeOut + tickInterval){
-      fakeOut = true;
-      lastFakeOut = (int)musicTime;
+      //fakeOut = true;
+      //lastFakeOut = (int)musicTime;
+      return;
     }
   }
   
@@ -61,7 +62,7 @@ public class Player{
  
  void playerCharRender(){
    
-   if (musicTime > lastVulnerable + tickInterval){
+   if (musicTime > lastVulnerable + tickInterval * 2){
      vulnerable = false;
    }
    
@@ -69,7 +70,7 @@ public class Player{
      fakeOut = false;
    }
    
-   if (musicTime > lastGuard + tickInterval){
+   if (musicTime > lastGuard + tickInterval * 2){
      guard = false;
    }
    
@@ -140,6 +141,7 @@ public class Player{
         println("no valid notes!");
       }else{
         metronomeTick.play();
+        currentChar.attack();
         if (noteScore.peekLast().hit() && !noteScore.peekLast().isLong){
           Note removed = noteScore.removeLast();
           deleteRender.addLast(removed);

@@ -44,6 +44,16 @@ public class Note{
     }
   }
   
+  float offset = abs(musicTime - time);
+  if (offset <= validTime/4){
+    println("perfect"+ offset);
+  }else{
+    println("bad" + offset);
+    players[owner].vulnerable = true;
+    players[owner].fakeOut = false;
+    players[owner].lastVulnerable = (int)musicTime;
+  }
+  
   hit = true; 
   return true;
  }
