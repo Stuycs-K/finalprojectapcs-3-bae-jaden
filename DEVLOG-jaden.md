@@ -4,6 +4,14 @@ This document must be updated daily every time you finish a work session.
 
 ## Jaden Bae
 
+### 2024-05-27 - Main menu / game loop
+2 Hour in MVP branch
+- Long note type for note class implementation
+2 Hour in MVP branch
+- New character class
+- Image display, moving some of player variables to be controlled inside character
+- planning to organize codes for future image display method
+
 ### 2024-05-26 - Main menu / game loop
 1 hour in MVP branch
 - Music Picker Menu prototype
