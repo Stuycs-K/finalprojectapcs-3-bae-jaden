@@ -77,14 +77,17 @@ public class Character{
       tint(255);
     }
     
-    
+ 
+   
    pushMatrix();
    if (player == 1){
     scale(-1, 1); 
-    image(currentImage, -(int) (width/2 + (300 * Math.pow(-1, player + 1))) - currentImage.width / 2, height / 2 - currentImage.height / 2);
+    position = new PVector(-(int) (width/2 + (300 * Math.pow(-1, player + 1))) - currentImage.width / 2, height / 2 - currentImage.height / 2);
+    image(currentImage, position.x - currentCamera.position.x, position.y + currentCamera.position.x);
    }else{
     scale (1, 1); 
-    image(currentImage, (int) (width/2 + (300 * Math.pow(-1, player + 1))) - currentImage.width / 2, height / 2 - currentImage.height / 2);
+    position = new PVector((int) (width/2 + (300 * Math.pow(-1, player + 1))) - currentImage.width / 2, height / 2 - currentImage.height / 2);
+    image(currentImage, position.x + currentCamera.position.x, position.y + currentCamera.position.x);
    }
     popMatrix();
   }
