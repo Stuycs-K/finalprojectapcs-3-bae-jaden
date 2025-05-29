@@ -4,7 +4,7 @@ This document must be updated daily every time you finish a work session.
 
 ## Jaden Bae
 
-### 2024-05-27 - Values / Camera
+### 2024-05-28 - Values / Camera
 40 min in MVP branch
 - Camera movement
 
