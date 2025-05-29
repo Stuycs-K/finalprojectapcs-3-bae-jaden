@@ -4,6 +4,10 @@ This document must be updated daily every time you finish a work session.
 
 ## Jaden Bae
 
+### 2024-05-27 - Values / Camera
+40 min in MVP branch
+- Camera movement
+
 ### 2024-05-27 - Main menu / game loop
 2 Hour in MVP branch
 - Long note type for note class implementation
