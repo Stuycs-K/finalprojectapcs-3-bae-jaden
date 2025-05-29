@@ -23,11 +23,13 @@ public class Player{
   boolean Pressed2 = false;
   boolean Pressed3 = false;
   char[] keys = {'a','s','d','f'};
-    
-  public Player(int num, char[] chosenkey){
+  
+  Character currentChar;
+  
+  public Player(int num, char[] chosenkey, String chosenCharacter){
     player = num;
     keys = chosenkey;
-    
+    currentChar = new Character(num, chosenCharacter);
   }
   
   void fakeOut(){
@@ -58,7 +60,6 @@ public class Player{
   }
  
  void playerCharRender(){
-   noStroke();
    
    if (musicTime > lastVulnerable + tickInterval){
      vulnerable = false;
@@ -72,17 +73,7 @@ public class Player{
      guard = false;
    }
    
-  if (fakeOut){
-    fill(255, 73, 28); 
-  }else if (vulnerable){
-    fill(255, 0, 0); 
-  }else{
-    fill(255); 
-  }
-   
-   
-   rectMode(CENTER);
-   rect((int) (width/2 + (300 * Math.pow(-1, player + 1))), height / 2, 100, 200);
+   currentChar.renderPlayerChar();
  }
  
  void playerNoteRender(){

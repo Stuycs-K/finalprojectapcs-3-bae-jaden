@@ -3,6 +3,9 @@ public class MainMenu{
   int currentIndexSong;
   String[] ChosenSong;
   
+  String player1Character = "Char1";
+  String player2Character = "Char2";
+  
   void compile(){//setup for songs
     File songFolder = new File(dataPath("Songs"));
     File[] songArray = songFolder.listFiles();

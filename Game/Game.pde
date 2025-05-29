@@ -57,7 +57,7 @@ void cleanUp(){
 }
 void loadGame(){
   gameEnd = false;
-  players = new Player[] {new Player(0, keys1), new Player(1, keys2)}; 
+  players = new Player[] {new Player(0, keys1, menuscreen.player1Character), new Player(1, keys2, menuscreen.player2Character)}; 
   noteReader = new ArrayDeque<>();
     try {
       File file = new File(dataPath(menuscreen.ChosenSong[1]));

@@ -142,7 +142,6 @@ public class Note{
        line(position.x, position.y, position.x, tailY);
        strokeWeight(12);
        circle(position.x, tailY, 100); 
-         circle(position.x, endY, 125); 
      }else{
        circle(position.x, position.y, radius); 
        
