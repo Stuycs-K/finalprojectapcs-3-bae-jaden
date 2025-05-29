@@ -5,7 +5,8 @@ public class Player{
   Deque<Note> noteScore = new ArrayDeque<>();
   int player;
   int combo = 0;
- 
+  int energy = 0;
+  
   boolean vulnerable = false;
   int lastVulnerable;
   

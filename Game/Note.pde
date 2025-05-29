@@ -35,12 +35,16 @@ public class Note{
      tailStartTime = (int) musicTime;
      tailStartY = position.y - offset;
      players[owner].combo ++;
+     players[owner].energy ++;
+     pressure++;
      return false;
       
     }else{
      longNoteStack ++;
      println("longNoteStack");
      players[owner].combo ++;
+     players[owner].energy ++;
+     pressure++;
      return false;
       
     }
@@ -49,10 +53,12 @@ public class Note{
   float offset = abs(musicTime - time);
   if (offset <= validTime/4){
     println("perfect"+ offset);
+    pressure++;
     players[owner].combo ++;
+    players[owner].energy ++;
   }else{
     println("bad" + offset);
-    players[owner].combo ++;
+    players[owner].combo = 0;
     players[owner].vulnerable = true;
     players[owner].fakeOut = false;
     players[owner].lastVulnerable = (int)musicTime;

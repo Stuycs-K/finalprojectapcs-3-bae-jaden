@@ -21,6 +21,8 @@ int lastMetronomeTick = 0;
 int preSongCount = 0;
 int currentPosScore = 0;
 
+int pressure = 0;
+
 int intermissionTimerMax = 60;
 int intermissionTimer = intermissionTimerMax;
 
@@ -39,6 +41,7 @@ void setup() {
   gameEnd = false;
   gameActive = false;
   menuscreen = new MainMenu();  
+  pressure = 0;
 }
 
 void cleanUp(){
