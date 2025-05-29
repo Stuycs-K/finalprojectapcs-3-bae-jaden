@@ -42,12 +42,14 @@ public class Player{
   }
   
   void capture(){
-    if (players[(player + 1) % 2].vulnerable == true){
+    if (players[(player + 1) % 2].vulnerable == true){ //capture success
       players[(player + 1) % 2].vulnerable = false;
       vulnerable = false;
       guard = true;
       lastGuard = (int) musicTime;
       currentPosScore += Math.pow(-1, player);
+      
+      currentCamera.setDestination(width / 2 + 200, height / 2);
     }else if (players[(player + 1) % 2].fakeOut == true){
       players[(player + 1) % 2].fakeOut = false;
       currentPosScore += Math.pow(-1, (player + 1) % 2);

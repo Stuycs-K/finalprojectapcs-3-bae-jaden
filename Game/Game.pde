@@ -29,7 +29,9 @@ int intermissionTimer = intermissionTimerMax;
 boolean gameEnd;
 boolean gameActive;
 boolean gameSetUpDone;
+
 MainMenu menuscreen;
+Camera currentCamera;
 
 Player[] players; 
 
@@ -41,7 +43,6 @@ void setup() {
   gameEnd = false;
   gameActive = false;
   menuscreen = new MainMenu();  
-  pressure = 0;
 }
 
 void cleanUp(){
@@ -63,6 +64,8 @@ void cleanUp(){
 void loadGame(){
   gameEnd = false;
   players = new Player[] {new Player(0, keys1, menuscreen.player1Character), new Player(1, keys2, menuscreen.player2Character)}; 
+  currentCamera = new Camera();
+  pressure = 0;
   noteReader = new ArrayDeque<>();
     try {
       File file = new File(dataPath(menuscreen.ChosenSong[1]));
@@ -167,6 +170,8 @@ void draw() {
     }
   }
   
+  //cameraRender
+  currentCamera.renderCamera();
     
   //screenBackground
   textAlign(CENTER);
