@@ -34,7 +34,7 @@ Player[] players;
 void setup() {
   
   size(1920, 1080, P2D);
-  fullScreen();
+  //fullScreen();
   posOffset = (width / 2);
   gameEnd = false;
   gameActive = false;

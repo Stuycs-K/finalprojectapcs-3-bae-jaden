@@ -4,8 +4,8 @@ import java.util.Deque;
 public class Player{
   Deque<Note> noteScore = new ArrayDeque<>();
   int player;
-  int score = 0;
-  
+  int combo = 0;
+ 
   boolean vulnerable = false;
   int lastVulnerable;
   
@@ -61,7 +61,13 @@ public class Player{
   }
  
  void playerCharRender(){
+   //combo display
    
+   textSize(30);
+   fill(255);
+   text("Combo: " + combo, (int) (width/2 + (300 * Math.pow(-1, player + 1))), height / 2);
+   
+    
    if (musicTime > lastVulnerable + tickInterval * 2){
      vulnerable = false;
    }

@@ -13,7 +13,6 @@ public class Character{
       currentImage = spriteSheet.get(0,0, width/4 , height / 2);
       currentStatus = "idle";
     }
-
   }
   
   void attack(){
@@ -71,9 +70,13 @@ public class Character{
     }else if (players[player].vulnerable){
       vulnerable();
       tint(255, 0, 0);
+    }else if (!players[player].vulnerable && !players[player].fakeOut && !currentStatus.equals("attack")){
+      idle();
+      tint(255);
     }else{
       tint(255);
     }
+    
     
    pushMatrix();
    if (player == 1){
