@@ -17,7 +17,7 @@ public class Camera{
   }
   
   void setDestination(float x, float y){
-    destination = new PVector(x,y);
+    destination = new PVector(-(x/4),(y/4));
     start = new PVector(globalPosition.x, globalPosition.y);
     finish = new PVector(globalPosition.x + x, globalPosition.y + y);
     lastCamChange = musicTime;

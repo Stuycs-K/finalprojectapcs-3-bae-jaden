@@ -49,7 +49,7 @@ public class Player{
       lastGuard = (int) musicTime;
       currentPosScore += Math.pow(-1, player);
       
-      currentCamera.setDestination(200, 0);
+      currentCamera.setDestination(width / 5 * (float)Math.pow(-1, player), 0);
     }else if (players[(player + 1) % 2].fakeOut == true){
       players[(player + 1) % 2].fakeOut = false;
       currentPosScore += Math.pow(-1, (player + 1) % 2);
