@@ -12,6 +12,7 @@ public class Camera{
   float zoomEnd;
   float lastZoom;
   float currentZoom;
+  int zoomDuration = 1000;
   
   
   public Camera(){
@@ -51,7 +52,7 @@ public class Camera{
     globalPosition.x = lerp(start.x, finish.x, t2);
     
     //zoomChange
-    float t3 = constrain((float)(musicTime - lastZoom) / (camPivotDuration / 2),0,1);
+    float t3 = constrain((float)(musicTime - lastZoom) / (zoomDuration),0,1);
     currentZoom = lerp(zoomStart, zoomEnd, sin(PI * t3));
     println(currentZoom);
   }

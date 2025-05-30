@@ -16,8 +16,15 @@ public class Background{
     //foreground
     imageMode(CORNER);  
     float startx = (-currentCamera.globalPosition.x) % (width / 5) - (width / 5);
+
     for (int i = 0; i < 8; i++){
-      image(tile, startx + (i * (width / 5)) - currentCamera.offset.x, 800 + currentCamera.offset.y, currentCamera.currentZoom * tile.width, currentCamera.currentZoom * tile.height);
+      float tileXPos = startx + (i * (width / 5)) - currentCamera.offset.x;
+      float tileYPos = 800 + currentCamera.offset.y;
+      
+      float xOffset = tileXPos - (width / 2);
+      float yOffset = tileYPos - (height / 2);
+      
+      image(tile, tileXPos + xOffset * (currentCamera.currentZoom - 1), tileYPos + yOffset * (currentCamera.currentZoom - 1),currentCamera.currentZoom * tile.width, currentCamera.currentZoom * tile.height);
     }
   }
   
