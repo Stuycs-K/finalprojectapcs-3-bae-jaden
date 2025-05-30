@@ -50,6 +50,7 @@ public class Player{
       currentPosScore += Math.pow(-1, player);
       
       currentCamera.setDestination(width / 5 * (float)Math.pow(-1, player), 0);
+      currentCamera.zoom(1.5);
     }else if (players[(player + 1) % 2].fakeOut == true){
       players[(player + 1) % 2].fakeOut = false;
       currentPosScore += Math.pow(-1, (player + 1) % 2);

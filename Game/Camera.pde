@@ -8,12 +8,28 @@ public class Camera{
   float lastCamChange;
   int camPivotDuration = 500;
   
+  float zoomStart;
+  float zoomEnd;
+  float lastZoom;
+  float currentZoom;
+  
+  
   public Camera(){
     offset = new PVector(0, 0);
     globalPosition = new PVector(0,0);
     destination = new PVector(0, 0);
     start = new PVector(0,0);
     finish = new PVector(0,0);
+    
+    zoomStart = 1;
+    currentZoom = 1;
+    zoomEnd = 1;
+  }
+  
+  void zoom(float zoomvalue){
+    zoomEnd = zoomvalue;
+    zoomStart = currentZoom;
+    lastZoom = musicTime;
   }
   
   void setDestination(float x, float y){
@@ -33,6 +49,11 @@ public class Camera{
     //globalPosition change
     float t2 = constrain((float)(musicTime - lastCamChange) / (camPivotDuration / 2),0,1);
     globalPosition.x = lerp(start.x, finish.x, t2);
+    
+    //zoomChange
+    float t3 = constrain((float)(musicTime - lastZoom) / (camPivotDuration / 2),0,1);
+    currentZoom = lerp(zoomStart, zoomEnd, sin(PI * t3));
+    println(currentZoom);
   }
   
 }
