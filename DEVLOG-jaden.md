@@ -7,6 +7,12 @@ This document must be updated daily every time you finish a work session.
 ### 2024-05-28 - Values / Camera
 40 min in MVP branch
 - Camera movement
+2 Hour in MVP Branch
+- Camera finish
+1 Hour in MVP Branch
+- Platform repeat / minor camera debugging
+1 Hour in MVP Branch
+- Background movement
 
 ### 2024-05-27 - Main menu / game loop
 2 Hour in MVP branch
