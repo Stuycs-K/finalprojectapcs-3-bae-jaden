@@ -80,14 +80,16 @@ public class Character{
  
    
    pushMatrix();
+   PVector camOffset = PVector.add(currentCamera.globalPosition, currentCamera.offset);
+   
    if (player == 1){
     scale(-1, 1); 
-    position = new PVector(-(int) (width/2 + (300 * Math.pow(-1, player + 1))) - currentImage.width / 2, height / 2 - currentImage.height / 2);
-    image(currentImage, position.x - currentCamera.position.x, position.y + currentCamera.position.x);
+    position = new PVector(-(int) (width/2 + (300 * Math.pow(-1, player + 1))) - currentImage.width / 2 - camOffset.x, height / 2 - currentImage.height / 2);
+    image(currentImage, position.x - currentCamera.offset.x, position.y + currentCamera.offset.y);
    }else{
     scale (1, 1); 
-    position = new PVector((int) (width/2 + (300 * Math.pow(-1, player + 1))) - currentImage.width / 2, height / 2 - currentImage.height / 2);
-    image(currentImage, position.x + currentCamera.position.x, position.y + currentCamera.position.x);
+    position = new PVector((int) (width/2 + (300 * Math.pow(-1, player + 1))) - currentImage.width / 2 - camOffset.x, height / 2 - currentImage.height / 2);
+    image(currentImage, position.x + currentCamera.offset.x, position.y + currentCamera.offset.y);
    }
     popMatrix();
   }

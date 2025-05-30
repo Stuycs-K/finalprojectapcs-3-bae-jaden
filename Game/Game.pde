@@ -32,6 +32,7 @@ boolean gameSetUpDone;
 
 MainMenu menuscreen;
 Camera currentCamera;
+Background currentBackground;
 
 Player[] players; 
 
@@ -65,6 +66,7 @@ void loadGame(){
   gameEnd = false;
   players = new Player[] {new Player(0, keys1, menuscreen.player1Character), new Player(1, keys2, menuscreen.player2Character)}; 
   currentCamera = new Camera();
+  currentBackground = new Background();
   pressure = 0;
   noteReader = new ArrayDeque<>();
     try {
@@ -172,7 +174,8 @@ void draw() {
   
   //cameraRender
   currentCamera.renderCamera();
-    
+  currentBackground.renderBackground();
+  
   //screenBackground
   textAlign(CENTER);
   for (int i = -2; i < 3; i++){
