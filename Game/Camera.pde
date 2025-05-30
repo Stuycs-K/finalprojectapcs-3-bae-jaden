@@ -6,7 +6,7 @@ public class Camera{
   PVector destination;
   PVector origin = new PVector(0, 0);
   float lastCamChange;
-  int camPivotDuration = 1000;
+  int camPivotDuration = 500;
   
   public Camera(){
     offset = new PVector(0, 0);
@@ -33,7 +33,6 @@ public class Camera{
     //globalPosition change
     float t2 = constrain((float)(musicTime - lastCamChange) / (camPivotDuration / 2),0,1);
     globalPosition.x = lerp(start.x, finish.x, t2);
-    println(globalPosition.x);
   }
   
 }
