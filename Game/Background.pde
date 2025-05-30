@@ -10,7 +10,13 @@ public class Background{
     
     //background
     imageMode(CENTER);
-    image(backdrop, width / 2 + ((-currentCamera.globalPosition.x) - currentCamera.offset.x) / 12, height / 2 + (currentCamera.globalPosition.y + currentCamera.offset.y) / 12);
+    float backXPos = width / 2 + ((-currentCamera.globalPosition.x) - currentCamera.offset.x) / 12;
+    float backYPos = height / 2 + (currentCamera.globalPosition.y + currentCamera.offset.y) / 12;
+    
+    float backXOffset = backXPos - (width / 2);
+    float backYOffset = backYPos - (height / 2);
+    
+    image(backdrop, backXPos + backXOffset * (currentCamera.currentZoom - 1), backYPos + backYOffset * (currentCamera.currentZoom - 1), currentCamera.currentZoom * backdrop.width, currentCamera.currentZoom * backdrop.height);
     
     
     //foreground

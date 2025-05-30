@@ -27,6 +27,10 @@ public class Camera{
     zoomEnd = 1;
   }
   
+  void renderImage(){
+    
+  }
+  
   void zoom(float zoomvalue){
     zoomEnd = zoomvalue;
     zoomStart = currentZoom;

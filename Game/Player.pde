@@ -150,7 +150,7 @@ public class Player{
         println("no valid notes!");
       }else{
         if (player == 0){
-         currentCamera.zoom(1.2); 
+         currentCamera.zoom(1.05); 
         }
         metronomeTick.play();
         currentChar.attack();
