@@ -12,9 +12,24 @@ public class Camera{
   float zoomEnd;
   float lastZoom;
   float currentZoom;
+  boolean zoomReturning;
   int zoomDuration = 1000;
   
-  
+  void applyZoomImage(PImage image, float posx, float posy, int xscale){
+   float XOffset;
+   float YOffset = posy - (height / 2);
+     
+   if (xscale == 1){
+     XOffset = posx - (width / 2);
+     
+   }else{
+     XOffset = posx + width / 2;
+   }
+   
+   image(image, posx + XOffset * (currentCamera.currentZoom - 1), posy + YOffset * (currentCamera.currentZoom - 1), currentCamera.currentZoom * image.width, currentCamera.currentZoom * image.height); 
+   
+    
+  }
   public Camera(){
     offset = new PVector(0, 0);
     globalPosition = new PVector(0,0);
@@ -32,8 +47,21 @@ public class Camera{
   }
   
   void zoom(float zoomvalue){
+    if (zoomReturning){
+     return; 
+    }
     zoomEnd = zoomvalue;
-    zoomStart = currentZoom;
+    
+    
+    if (zoomvalue > 1){
+      currentZoom = (currentZoom - zoomStart) / 2 + zoomStart;
+      zoomStart = currentZoom;
+    }else{
+      currentZoom = zoomStart;
+      zoomStart = currentZoom;
+      zoomReturning = true;
+    }
+    
     lastZoom = musicTime;
   }
   
@@ -57,7 +85,12 @@ public class Camera{
     
     //zoomChange
     float t3 = constrain((float)(musicTime - lastZoom) / (zoomDuration),0,1);
-    currentZoom = lerp(zoomStart, zoomEnd, sin(PI * t3));
+    currentZoom = lerp(zoomStart, zoomEnd, sin(PI / 2 * t3));
+    if (t3 == 1 && zoomReturning == true){
+      zoomReturning = false;
+      currentZoom = 1;
+      zoomStart = 1;
+    }
     println(currentZoom);
   }
   

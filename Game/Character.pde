@@ -83,11 +83,11 @@ public class Character{
    if (player == 1){
     scale(-1, 1); 
     position = new PVector(-(int) (width/2 + (150 * Math.pow(-1, player + 1))) - currentImage.width / 2, 50 + height / 2 - currentImage.height / 2);
-    image(currentImage, position.x + currentCamera.offset.x, position.y + currentCamera.offset.y);
+    currentCamera.applyZoomImage(currentImage,position.x + currentCamera.offset.x, position.y + currentCamera.offset.y, -1);
    }else{
     scale (1, 1); 
     position = new PVector((int) (width/2 + (150 * Math.pow(-1, player + 1))) - currentImage.width / 2, 50 + height / 2 - currentImage.height / 2);
-    image(currentImage, position.x - currentCamera.offset.x, position.y + currentCamera.offset.y);
+    currentCamera.applyZoomImage(currentImage, position.x - currentCamera.offset.x, position.y + currentCamera.offset.y, 1);
    }
     popMatrix();
   }
