@@ -52,6 +52,7 @@ public class MainMenu{
     
     if (currentIndexSong >= 0 && currentIndexSong < ListOfSong.size()){
       ChosenSong = ListOfSong.get(currentIndexSong);
+      println("Songs/"+ChosenSong[0]+"/map.txt");
     }
     
   }

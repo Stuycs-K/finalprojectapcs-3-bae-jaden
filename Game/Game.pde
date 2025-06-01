@@ -87,8 +87,9 @@ void loadGame(){
       File file = new File(dataPath(menuscreen.ChosenSong[1]));
       mapSound = new SoundFile(this, menuscreen.ChosenSong[2]);
       metronomeTick = new SoundFile(this, "metronomeTick.mp3");
-      Scanner input = new Scanner(file);
-
+      Scanner input = new Scanner(file, "UTF-8");
+      System.out.println(file.exists());
+      System.out.println(file.length());
       boolean reached = false;
       while(input.hasNextLine()){
         String line = input.nextLine();
@@ -97,12 +98,13 @@ void loadGame(){
           tickInterval = parseInt(timingData[1]);
           BPM = Math.round(60000 / parseFloat(timingData[1]));
           println(tickInterval, BPM);  
-          appearanceTime = tickInterval * 3;
+          appearanceTime = tickInterval * 2;
           validTime = appearanceTime / 5;
         }
         
         
         if (line.equals("[HitObjects]")){
+          
           reached = true;
           continue;
         }
@@ -119,7 +121,7 @@ void loadGame(){
             packed[1] = 0;
           }
           noteReader.addLast(packed);
-        
+          
         }
         
         
