@@ -19,6 +19,9 @@ public class Player{
   ArrayList<Note> noteDeleteList = new ArrayList<Note>();
   Deque<Note> deleteRender = new ArrayDeque<>();
   
+  ArrayList<Effect> EffectRender = new ArrayList<Effect>();
+  ArrayList<Effect> ResultDeleteList = new ArrayList<Effect>();
+   
   boolean Pressed0 = false;
   boolean Pressed1 = false;
   boolean Pressed2 = false;
@@ -51,6 +54,7 @@ public class Player{
       
       currentCamera.setDestination(width / 5 * (float)Math.pow(-1, player), 0);
       currentCamera.zoom(1); 
+      EffectRender.add(new Effect(player, hitImage));
     }else if (players[(player + 1) % 2].fakeOut == true){
       players[(player + 1) % 2].fakeOut = false;
       currentPosScore += Math.pow(-1, (player + 1) % 2);
@@ -120,6 +124,18 @@ public class Player{
          break; 
         }
       }     
+    }
+    
+    ResultDeleteList.clear();
+    
+    for (Effect result : EffectRender){
+      if (!result.Display()){
+        ResultDeleteList.add(result);
+      }
+    }
+    
+    for (Effect result : ResultDeleteList){
+      EffectRender.remove(result);
     }
     
   }

@@ -53,11 +53,13 @@ public class Note{
   float offset = abs(musicTime - time);
   if (offset <= validTime/4){
     println("perfect"+ offset);
+    players[owner].EffectRender.add(new Effect(owner, perfectImage));
     pressure++;
     players[owner].combo ++;
     players[owner].energy ++;
   }else{
     println("bad" + offset);
+    players[owner].EffectRender.add(new Effect(owner, badImage));
     players[owner].combo = 0;
     players[owner].vulnerable = true;
     players[owner].fakeOut = false;
@@ -135,6 +137,7 @@ public class Note{
         players[owner].vulnerable = true;
         players[owner].fakeOut = false;
         players[owner].lastVulnerable = (int)musicTime;
+        players[owner].EffectRender.add(new Effect(owner, missImage));
      }
      tailY = position.y - offset;
      stroke(255,255,255,alpha);

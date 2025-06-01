@@ -33,6 +33,8 @@ boolean gameSetUpDone;
 PImage backdrop;
 PImage crowd;
 
+PImage perfectImage, badImage, missImage, hitImage;
+
 MainMenu menuscreen;
 Camera currentCamera;
 Background currentBackground;
@@ -52,6 +54,10 @@ void setup() {
   backdrop = loadImage("Assets/Backdrop.png");
   crowd = loadImage("Assets/Crowd.png");
   
+  perfectImage = loadImage("Assets/Perfect.png");
+  badImage = loadImage("Assets/Bad.png");
+  missImage = loadImage("Assets/Miss.png");
+  hitImage = loadImage("Assets/Hit.png");
 }
 
 void cleanUp(){
