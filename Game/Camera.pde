@@ -14,6 +14,7 @@ public class Camera{
   float currentZoom;
   boolean zoomReturning;
   int zoomDuration = 1000;
+  float sineT;
   
   void applyZoomImage(PImage image, float posx, float posy, int xscale){
    float XOffset;
@@ -26,7 +27,13 @@ public class Camera{
      XOffset = posx + width / 2;
    }
    
-   image(image, posx + XOffset * (currentCamera.currentZoom - 1), posy + YOffset * (currentCamera.currentZoom - 1), currentCamera.currentZoom * image.width, currentCamera.currentZoom * image.height); 
+   float YScale = currentCamera.currentZoom * image.height;
+   float Ypos = posy + YOffset * (currentCamera.currentZoom - 1);
+   if (image == crowd){
+     YScale += (sineT * image.height * 0.2);
+     Ypos -= (sineT * image.height * 0.3);
+   }
+   image(image, posx + XOffset * (currentCamera.currentZoom - 1), Ypos, currentCamera.currentZoom * image.width, YScale); 
    
     
   }
@@ -91,7 +98,10 @@ public class Camera{
       currentZoom = 1;
       zoomStart = 1;
     }
-    println(currentZoom);
+    
+    //sinWaveChange
+    float t4 = constrain((float)(musicTime - lastZoom) / (zoomDuration / 2),0,1);
+    sineT = sin(PI * t4);
   }
   
 }

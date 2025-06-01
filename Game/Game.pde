@@ -31,6 +31,7 @@ boolean gameActive;
 boolean gameSetUpDone;
 
 PImage backdrop;
+PImage crowd;
 
 MainMenu menuscreen;
 Camera currentCamera;
@@ -49,6 +50,7 @@ void setup() {
   
   //assetsLoad
   backdrop = loadImage("Assets/Backdrop.png");
+  crowd = loadImage("Assets/Crowd.png");
   
 }
 

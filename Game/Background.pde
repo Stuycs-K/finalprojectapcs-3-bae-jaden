@@ -16,6 +16,12 @@ public class Background{
     currentCamera.applyZoomImage(backdrop, backXPos, backYPos,1);
     
     
+    //middleground
+    float middleXPos = width / 2 + ((-currentCamera.globalPosition.x) - currentCamera.offset.x) / 8;
+    float middleYPos = height / 2 + (currentCamera.globalPosition.y + currentCamera.offset.y) / 8;
+    
+    currentCamera.applyZoomImage(crowd, middleXPos, middleYPos + 100,1);
+    
     //foreground
     imageMode(CORNER);  
     float startx = (-currentCamera.globalPosition.x) % (width / 5) - (width / 5);
