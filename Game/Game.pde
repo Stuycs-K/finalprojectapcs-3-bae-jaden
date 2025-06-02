@@ -35,9 +35,12 @@ PImage backdrop, crowd, rope, pole;
 
 PImage perfectImage, badImage, missImage, hitImage;
 
+PImage dangerStatus;
+
 MainMenu menuscreen;
 Camera currentCamera;
 Background currentBackground;
+DangerScreen currentDangerScreen;
 
 Player[] players; 
 
@@ -60,6 +63,7 @@ void setup() {
   badImage = loadImage("Assets/Bad.png");
   missImage = loadImage("Assets/Miss.png");
   hitImage = loadImage("Assets/Hit.png");
+  dangerStatus = loadImage("Assets/Danger.png");
 }
 
 void cleanUp(){
@@ -83,6 +87,7 @@ void loadGame(){
   players = new Player[] {new Player(0, keys1, menuscreen.player1Character), new Player(1, keys2, menuscreen.player2Character)}; 
   currentCamera = new Camera();
   currentBackground = new Background();
+  currentDangerScreen = new DangerScreen();
   pressure = 0;
   noteReader = new ArrayDeque<>();
     try {
@@ -191,6 +196,7 @@ void draw() {
   //cameraRender
   currentCamera.renderCamera();
   currentBackground.renderBackground();
+  currentDangerScreen.render();
   
   //screenBackground
   textAlign(CENTER);

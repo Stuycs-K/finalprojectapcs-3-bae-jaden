@@ -64,7 +64,6 @@ public class Background{
     rect(UIpos, 100, (width * 0.5) + (width * 0.5) * (-currentPosScore * 0.1), 30); //plr one
     
     fill(255);
-    
   }
   
 }
