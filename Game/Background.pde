@@ -23,15 +23,33 @@ public class Background{
     currentCamera.applyZoomImage(crowd, middleXPos, middleYPos + 100,1);
     
     //foreground
+    
+    //rope
+    imageMode(CENTER);
+    currentCamera.applyZoomImage(rope, width / 2, 700, 1);
+    imageMode(CORNER);
+    
+    //pole
+    float startx = (-currentCamera.globalPosition.x) % (width / 3) - width / 3;
+    
+    for (int i = 0; i < 5; i++){
+      float poleXPos = startx + (i * (width / 3)) - currentCamera.offset.x;
+      float poleYPos = 600 + currentCamera.offset.y;
+      
+      currentCamera.applyZoomImage(pole,poleXPos, poleYPos, 1);
+    }
+    
+    //tiles
     imageMode(CORNER);  
-    float startx = (-currentCamera.globalPosition.x) % (width / 5) - (width / 5);
-
+    startx = (-currentCamera.globalPosition.x) % (width / 5) - (width / 5);
+  
     for (int i = 0; i < 8; i++){
       float tileXPos = startx + (i * (width / 5)) - currentCamera.offset.x;
       float tileYPos = 800 + currentCamera.offset.y;
       
       currentCamera.applyZoomImage(tile,tileXPos, tileYPos, 1);
     }
+    
     
     //UIs
     

@@ -30,8 +30,8 @@ boolean gameEnd;
 boolean gameActive;
 boolean gameSetUpDone;
 
-PImage backdrop;
-PImage crowd;
+PImage backdrop, crowd, rope, pole;
+
 
 PImage perfectImage, badImage, missImage, hitImage;
 
@@ -53,6 +53,8 @@ void setup() {
   //assetsLoad
   backdrop = loadImage("Assets/Backdrop.png");
   crowd = loadImage("Assets/Crowd.png");
+  rope = loadImage("Assets/Rope.png");
+  pole = loadImage("Assets/Pole.png");
   
   perfectImage = loadImage("Assets/Perfect.png");
   badImage = loadImage("Assets/Bad.png");
