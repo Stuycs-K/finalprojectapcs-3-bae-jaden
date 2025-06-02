@@ -8,7 +8,7 @@ SoundFile mapSound;
 SoundFile metronomeTick;
 Deque<int[]> noteReader;
 int posOffset;
-char[] keys1 = {'a', 's', 'd', 'g'};
+char[] keys1 = {'a', 's', 'd', 'f'};
 char[] keys2 = {'k', 'l', ';', '\''};
 
 int startTime;

@@ -32,6 +32,21 @@ public class Background{
       
       currentCamera.applyZoomImage(tile,tileXPos, tileYPos, 1);
     }
+    
+    //UIs
+    
+    rectMode(CORNER);
+    float UIpos = 0;
+    fill(74, 228, 255);
+    noStroke();
+    rect(UIpos, 100, (width * 0.5) + (width * 0.5) * (currentPosScore * 0.1), 30); //plr zero 
+    
+    UIpos = (width * 0.5) + (width * 0.5) * (currentPosScore * 0.1);
+    fill(255, 74, 83);
+    rect(UIpos, 100, (width * 0.5) + (width * 0.5) * (-currentPosScore * 0.1), 30); //plr one
+    
+    fill(255);
+    
   }
   
 }
