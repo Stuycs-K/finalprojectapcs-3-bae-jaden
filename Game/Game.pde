@@ -214,10 +214,17 @@ void draw() {
 }
 
 void keyPressed() {
+  
   if (gameActive == false){
     menuscreen.keyPressed();
     return;
   }
+  
+  if (key == 'q') {
+     gameEnd = true;
+     return;
+  }
+  
   for (Player p : players) {
     p.keyPressed();
   }
