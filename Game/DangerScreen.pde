@@ -8,15 +8,16 @@ public class DangerScreen{
   
   void render(){
     pushMatrix();
-    if (currentPosScore > 7){     
+    if (currentPosScore > 0){    
       scale(-1, 1); 
-    }else if (currentPosScore < -7){
+      image(Screenlayer, - width, 0);
+    }else if (currentPosScore < 0){
       scale(1, 1); 
+      image(Screenlayer, 0, 0);
     }else{
+      popMatrix();
      return; 
     }
-    
-    image(Screenlayer, 0, 0);
     scale(1, 1); 
     popMatrix();
   }
