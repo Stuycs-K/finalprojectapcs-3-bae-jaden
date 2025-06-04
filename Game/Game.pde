@@ -37,7 +37,10 @@ PImage perfectImage, badImage, missImage, hitImage;
 
 PImage dangerStatus;
 
+String currentMenu;
+
 MainMenu menuscreen;
+CharSelectionScreen charscreen;
 Camera currentCamera;
 Background currentBackground;
 DangerScreen currentDangerScreen;
@@ -52,7 +55,8 @@ void setup() {
   gameEnd = false;
   gameActive = false;
   menuscreen = new MainMenu();  
-  
+  charscreen = new CharSelectionScreen();
+  currentMenu = "SongScreen";
   //assetsLoad
   backdrop = loadImage("Assets/Backdrop.png");
   crowd = loadImage("Assets/Crowd.png");
@@ -146,7 +150,13 @@ void loadGame(){
 void draw() {
   //guard for menu screen
   if (gameActive == false){
-    menuscreen.screenRenderMenu();
+    if (currentMenu.equals("SongScreen")){
+      menuscreen.screenRenderMenu();
+      
+    }else if (currentMenu.equals("CharScreen")){
+      charscreen.screenRenderMenu();
+    }
+    
     return;
   }else if (gameActive == true && gameSetUpDone == false){
     loadGame();
@@ -216,7 +226,23 @@ void draw() {
 void keyPressed() {
   
   if (gameActive == false){
-    menuscreen.keyPressed();
+    if (key == 'c'){
+      if (currentMenu.equals("SongScreen")){
+        currentMenu = "CharScreen";
+        
+      }else if (currentMenu.equals("CharScreen")){
+        currentMenu = "SongScreen";
+      }
+      
+    }else{
+      if (currentMenu.equals("SongScreen")){
+        menuscreen.keyPressed();
+        
+      }else if (currentMenu.equals("CharScreen")){
+        charscreen.keyPressed();
+      }
+      
+    }
     return;
   }
   
