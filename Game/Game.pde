@@ -54,7 +54,7 @@ void setup() {
   posOffset = (width / 2);
   gameEnd = false;
   gameActive = false;
-  menuscreen = new MainMenu();  
+  menuscreen = new MainMenu();  s
   charscreen = new CharSelectionScreen();
   currentMenu = "SongScreen";
   //assetsLoad
