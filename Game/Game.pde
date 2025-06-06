@@ -8,7 +8,7 @@ SoundFile mapSound;
 SoundFile metronomeTick;
 Deque<int[]> noteReader;
 int posOffset;
-char[] keys1 = {'a', 's', 'd', 'g'};
+char[] keys1 = {'a', 's', 'd', 'f'};
 char[] keys2 = {'k', 'l', ';', '\''};
 
 int startTime;
@@ -30,14 +30,20 @@ boolean gameEnd;
 boolean gameActive;
 boolean gameSetUpDone;
 
-PImage backdrop;
-PImage crowd;
+PImage backdrop, crowd, rope, pole;
+
 
 PImage perfectImage, badImage, missImage, hitImage;
 
+PImage dangerStatus;
+
+String currentMenu;
+
 MainMenu menuscreen;
+CharSelectionScreen charscreen;
 Camera currentCamera;
 Background currentBackground;
+DangerScreen currentDangerScreen;
 
 Player[] players; 
 
@@ -48,16 +54,20 @@ void setup() {
   posOffset = (width / 2);
   gameEnd = false;
   gameActive = false;
-  menuscreen = new MainMenu();  
-  
+  menuscreen = new MainMenu();  s
+  charscreen = new CharSelectionScreen();
+  currentMenu = "SongScreen";
   //assetsLoad
   backdrop = loadImage("Assets/Backdrop.png");
   crowd = loadImage("Assets/Crowd.png");
+  rope = loadImage("Assets/Rope.png");
+  pole = loadImage("Assets/Pole.png");
   
   perfectImage = loadImage("Assets/Perfect.png");
   badImage = loadImage("Assets/Bad.png");
   missImage = loadImage("Assets/Miss.png");
   hitImage = loadImage("Assets/Hit.png");
+  dangerStatus = loadImage("Assets/Danger.png");
 }
 
 void cleanUp(){
@@ -81,6 +91,7 @@ void loadGame(){
   players = new Player[] {new Player(0, keys1, menuscreen.player1Character), new Player(1, keys2, menuscreen.player2Character)}; 
   currentCamera = new Camera();
   currentBackground = new Background();
+  currentDangerScreen = new DangerScreen();
   pressure = 0;
   noteReader = new ArrayDeque<>();
     try {
@@ -141,7 +152,13 @@ void loadGame(){
 void draw() {
   //guard for menu screen
   if (gameActive == false){
-    menuscreen.screenRenderMenu();
+    if (currentMenu.equals("SongScreen")){
+      menuscreen.screenRenderMenu();
+      
+    }else if (currentMenu.equals("CharScreen")){
+      charscreen.screenRenderMenu();
+    }
+    
     return;
   }else if (gameActive == true && gameSetUpDone == false){
     loadGame();
@@ -191,6 +208,7 @@ void draw() {
   //cameraRender
   currentCamera.renderCamera();
   currentBackground.renderBackground();
+  currentDangerScreen.render();
   
   //screenBackground
   textAlign(CENTER);
@@ -208,10 +226,33 @@ void draw() {
 }
 
 void keyPressed() {
+  
   if (gameActive == false){
-    menuscreen.keyPressed();
+    if (key == 'c'){
+      if (currentMenu.equals("SongScreen")){
+        currentMenu = "CharScreen";
+        
+      }else if (currentMenu.equals("CharScreen")){
+        currentMenu = "SongScreen";
+      }
+      
+    }else{
+      if (currentMenu.equals("SongScreen")){
+        menuscreen.keyPressed();
+        
+      }else if (currentMenu.equals("CharScreen")){
+        charscreen.keyPressed();
+      }
+      
+    }
     return;
   }
+  
+  if (key == 'q') {
+     gameEnd = true;
+     return;
+  }
+  
   for (Player p : players) {
     p.keyPressed();
   }

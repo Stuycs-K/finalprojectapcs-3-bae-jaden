@@ -34,20 +34,17 @@ public class Note{
      longNoteActive = true;
      tailStartTime = (int) musicTime;
      tailStartY = position.y - offset;
-     players[owner].combo ++;
-     players[owner].energy ++;
-     pressure++;
-     return false;
       
     }else{
      longNoteStack ++;
-     println("longNoteStack");
-     players[owner].combo ++;
-     players[owner].energy ++;
-     pressure++;
-     return false;
+     println("longNoteStack"); 
       
     }
+    players[owner].EffectRender.add(new Effect(owner, perfectImage));
+    players[owner].combo ++;
+    players[owner].energy ++;
+    pressure++;
+    return false;
   }
   
   float offset = abs(musicTime - time);
