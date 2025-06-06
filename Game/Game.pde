@@ -52,6 +52,8 @@ Player[] players;
 Amplitude amp;
 float volume = 0;
 
+ConfettiManager currentConfettiManager;
+
 void randomSongPlay(){
  int randomIndexSong = (int)(Math.random() * Songscreen.ListOfSong.size());
   mapSound = new SoundFile(this, Songscreen.ListOfSong.get(randomIndexSong)[2]);
@@ -63,14 +65,16 @@ void randomSongPlay(){
 void setup() {
   
   size(1920, 1080, P2D);
-  //fullScreen(P2D);
+  fullScreen(P2D);
   posOffset = (width / 2);
   gameEnd = false;
   gameActive = false;
   Songscreen = new SongMenu();
   charscreen = new CharSelectionScreen();
   currentTransitionScreen = new TransitionScreen();
+  currentConfettiManager = new ConfettiManager();
   currentTitleScreen = new TitleScreen();
+  
   
   currentMenu = "TitleScreen";
   //assetsLoad
@@ -173,6 +177,7 @@ void loadGame(){
 void draw() {
   volume = amp.analyze();
   
+  
   //guard for menu screen
   if (currentTransitionScreen.life > 0){
      currentTransitionScreen.render(); 
@@ -252,6 +257,8 @@ void draw() {
     players[i].playerCharRender();
     players[i].playerNoteRender();
   }
+  
+  
 
 }
 
