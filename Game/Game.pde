@@ -39,11 +39,13 @@ PImage dangerStatus;
 
 String currentMenu;
 
-MainMenu menuscreen;
+SongMenu Songscreen;
 CharSelectionScreen charscreen;
 Camera currentCamera;
 Background currentBackground;
 DangerScreen currentDangerScreen;
+TransitionScreen currentTransitionScreen;
+TitleScreen currentTitleScreen;
 
 Player[] players; 
 
@@ -54,9 +56,12 @@ void setup() {
   posOffset = (width / 2);
   gameEnd = false;
   gameActive = false;
-  menuscreen = new MainMenu();
+  Songscreen = new SongMenu();
   charscreen = new CharSelectionScreen();
-  currentMenu = "SongScreen";
+  currentTransitionScreen = new TransitionScreen();
+  currentTitleScreen = new TitleScreen();
+  
+  currentMenu = "TitleScreen";
   //assetsLoad
   backdrop = loadImage("Assets/Backdrop.png");
   crowd = loadImage("Assets/Crowd.png");
@@ -79,6 +84,7 @@ void cleanUp(){
   lastMetronomeTick = 0;
   preSongCount = 0;
   currentPosScore = 0;
+  currentTransitionScreen = new TransitionScreen();
   
   if (mapSound != null && mapSound.isPlaying()) {
     mapSound.stop();
@@ -88,15 +94,15 @@ void cleanUp(){
 }
 void loadGame(){
   gameEnd = false;
-  players = new Player[] {new Player(0, keys1, menuscreen.player1Character), new Player(1, keys2, menuscreen.player2Character)}; 
+  players = new Player[] {new Player(0, keys1, Songscreen.player1Character), new Player(1, keys2, Songscreen.player2Character)}; 
   currentCamera = new Camera();
   currentBackground = new Background();
   currentDangerScreen = new DangerScreen();
   pressure = 0;
   noteReader = new ArrayDeque<>();
     try {
-      File file = new File(dataPath(menuscreen.ChosenSong[1]));
-      mapSound = new SoundFile(this, menuscreen.ChosenSong[2]);
+      File file = new File(dataPath(Songscreen.ChosenSong[1]));
+      mapSound = new SoundFile(this, Songscreen.ChosenSong[2]);
       metronomeTick = new SoundFile(this, "metronomeTick.mp3");
       Scanner input = new Scanner(file, "UTF-8");
       System.out.println(file.exists());
@@ -151,12 +157,19 @@ void loadGame(){
 
 void draw() {
   //guard for menu screen
+  if (currentTransitionScreen.life > 0){
+     currentTransitionScreen.render(); 
+     return;
+  }
+    
   if (gameActive == false){
     if (currentMenu.equals("SongScreen")){
-      menuscreen.screenRenderMenu();
+      Songscreen.screenRenderMenu();
       
     }else if (currentMenu.equals("CharScreen")){
       charscreen.screenRenderMenu();
+    }else if (currentMenu.equals("TitleScreen")){
+      currentTitleScreen.render();
     }
     
     return;
@@ -228,17 +241,24 @@ void draw() {
 void keyPressed() {
   
   if (gameActive == false){
+    if (currentMenu.equals("TitleScreen")){
+      currentMenu = "SongScreen";
+      currentTransitionScreen.life = 60;
+    }
+    
     if (key == 'c'){
       if (currentMenu.equals("SongScreen")){
         currentMenu = "CharScreen";
+        currentTransitionScreen.life = 60;
         
       }else if (currentMenu.equals("CharScreen")){
         currentMenu = "SongScreen";
+        currentTransitionScreen.life = 60;
       }
       
     }else{
       if (currentMenu.equals("SongScreen")){
-        menuscreen.keyPressed();
+        Songscreen.keyPressed();
         
       }else if (currentMenu.equals("CharScreen")){
         charscreen.keyPressed();

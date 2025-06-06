@@ -1,4 +1,4 @@
-public class MainMenu{
+public class SongMenu{
   ArrayList<String[]> ListOfSong = new ArrayList<String[]>(); //"SongName, mapdirectory, musicdirectory"
   int currentIndexSong;
   String[] ChosenSong;
@@ -37,7 +37,7 @@ public class MainMenu{
     }
   }
   
-  public MainMenu(){//creation
+  public SongMenu(){//creation
     compile();
   }
   
@@ -47,6 +47,7 @@ public class MainMenu{
     } else if (key == 's'){
       currentIndexSong = Math.max(0, Math.min(currentIndexSong + 1, ListOfSong.size()));
     } else if (key == 'x' && ChosenSong != null){
+      currentTransitionScreen.life = 60;
       gameActive = true;      
     }
     
