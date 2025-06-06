@@ -60,9 +60,11 @@ public class CharSelectionScreen{
       if (i == player0currentIndex){
         noFill();
         stroke(74, 228, 255);
+        rect(width / 2, height / 5 + ((i - 1) * 50), 100,50);
       }else if (i == player1currentIndex){
         noFill();
-        stroke(74, 228, 255);
+        stroke(255, 74, 83);
+        rect(width / 2, height / 5 + ((i - 1) * 50), 100,50);
       }
       
     }
@@ -74,15 +76,15 @@ public class CharSelectionScreen{
   
   void keyPressed(){
     if (key == 'a') {
-      player0currentIndex = Math.max(0, Math.min(player0currentIndex - 1, ListOfCharacter.size()));
+      player0currentIndex = Math.max(0, Math.min(player0currentIndex - 1, ListOfCharacter.size() - 1));
     } else if (key == 'f'){
-      player0currentIndex = Math.max(0, Math.min(player0currentIndex + 1, ListOfCharacter.size()));
+      player0currentIndex = Math.max(0, Math.min(player0currentIndex + 1, ListOfCharacter.size() - 1));
     } else if (key == 's' || key == 'd'){
       bind(0, player0currentIndex);
     } else if (key == 'k'){
-      player1currentIndex = Math.max(0, Math.min(player1currentIndex - 1, ListOfCharacter.size()));
+      player1currentIndex = Math.max(0, Math.min(player1currentIndex - 1, ListOfCharacter.size()- 1));
     } else if (key == '\''){
-      player1currentIndex = Math.max(0, Math.min(player1currentIndex + 1, ListOfCharacter.size()));
+      player1currentIndex = Math.max(0, Math.min(player1currentIndex + 1, ListOfCharacter.size()-1));
     } else if (key == 'l' || key == ';'){
       bind(1, player1currentIndex);
     } else if (key == 'x' && player0chosenIndex != player1chosenIndex){
