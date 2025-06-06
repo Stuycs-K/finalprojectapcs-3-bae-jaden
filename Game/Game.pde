@@ -49,6 +49,17 @@ TitleScreen currentTitleScreen;
 
 Player[] players; 
 
+Amplitude amp;
+float volume = 0;
+
+void randomSongPlay(){
+ int randomIndexSong = (int)(Math.random() * Songscreen.ListOfSong.size());
+  mapSound = new SoundFile(this, Songscreen.ListOfSong.get(randomIndexSong)[2]);
+  mapSound.play(); 
+  
+  amp.input(mapSound);
+  
+}
 void setup() {
   
   size(1920, 1080, P2D);
@@ -73,6 +84,10 @@ void setup() {
   missImage = loadImage("Assets/Miss.png");
   hitImage = loadImage("Assets/Hit.png");
   dangerStatus = loadImage("Assets/Danger.png");
+  
+  amp = new Amplitude(this);
+  //song play
+  randomSongPlay();
 }
 
 void cleanUp(){
@@ -156,6 +171,8 @@ void loadGame(){
 }
 
 void draw() {
+  volume = amp.analyze();
+  
   //guard for menu screen
   if (currentTransitionScreen.life > 0){
      currentTransitionScreen.render(); 
