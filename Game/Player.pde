@@ -49,6 +49,9 @@ public class Player{
       players[(player + 1) % 2].vulnerable = false;
       vulnerable = false;
       guard = true;
+      currentChar.capture();
+      players[(player + 1) % 2].currentChar.fling();
+      
       lastGuard = (int) musicTime;
       currentPosScore += Math.pow(-1, player);
       
@@ -84,8 +87,11 @@ public class Player{
      fakeOut = false;
    }
    
-   if (musicTime > lastGuard + tickInterval * 2){
+   if (musicTime > lastGuard + tickInterval * 2 && guard){
      guard = false;
+     
+     currentChar.idle();
+     players[(player + 1) % 2].currentChar.idle();
    }
    
    currentChar.renderPlayerChar();

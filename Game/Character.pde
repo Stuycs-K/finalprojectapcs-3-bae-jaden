@@ -17,7 +17,7 @@ public class Character{
   
   void attack(){
     if (!currentStatus.equals("attack")){
-      currentImage = spriteSheet.get(width/4 * int(random(1, 3)) ,0, width/4 , height / 2);
+      currentImage = spriteSheet.get(width/4 * int(random(1, 4)) ,0, width/4 , height / 2);
       lastAction = (int)musicTime;
       currentStatus = "attack";
     }
@@ -61,32 +61,35 @@ public class Character{
   }
   
   void renderPlayerChar(){
-    if (musicTime - lastAction > validTime && currentStatus.equals("attack")){
-      idle();
-    }
-    if (players[player].fakeOut){
-      fakeout();
-      tint(255, 73, 28);
-    }else if (players[player].vulnerable){
-      vulnerable();
-      tint(255, 0, 0);
-    }else if (!players[player].vulnerable && !players[player].fakeOut && !currentStatus.equals("attack")){
-      idle();
-      tint(255);
-    }else{
-      tint(255);
-    }
+      if (players[player].fakeOut){
+        fakeout();
+        tint(255, 73, 28);
+      } else if (players[player].vulnerable){
+        vulnerable();
+        tint(255, 0, 0);
+      } else if (players[player].guard && musicTime - lastAction < validTime) {
+        tint(255);
+      } else if (musicTime - lastAction > validTime && (currentStatus.equals("attack") || currentStatus.equals("fling") || currentStatus.equals("capture"))){
+        idle();
+        tint(255);
+      } else {
+        tint(255);
+      }
     
  
    
    pushMatrix();
+   int offset = 300;
+   if (currentStatus.equals("attack")){
+     offset = 150;
+   }
    if (player == 1){
     scale(-1, 1); 
-    position = new PVector(-(int) (width/2 + (150 * Math.pow(-1, player + 1))) - currentImage.width / 2, 50 + height / 2 - currentImage.height / 2);
+    position = new PVector(-(int) (width/2 + (offset * Math.pow(-1, player + 1))) - currentImage.width / 2, 50 + height / 2 - currentImage.height / 2);
     currentCamera.applyZoomImage(currentImage,position.x + currentCamera.offset.x, position.y + currentCamera.offset.y, -1);
    }else{
     scale (1, 1); 
-    position = new PVector((int) (width/2 + (150 * Math.pow(-1, player + 1))) - currentImage.width / 2, 50 + height / 2 - currentImage.height / 2);
+    position = new PVector((int) (width/2 + (offset * Math.pow(-1, player + 1))) - currentImage.width / 2, 50 + height / 2 - currentImage.height / 2);
     currentCamera.applyZoomImage(currentImage, position.x - currentCamera.offset.x, position.y + currentCamera.offset.y, 1);
    }
     popMatrix();

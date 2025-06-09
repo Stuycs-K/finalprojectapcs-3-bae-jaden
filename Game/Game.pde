@@ -234,9 +234,9 @@ void draw() {
     if (currentPosScore == 0){
       winMessage = "Tie!";
     }else if (currentPosScore > 0){
-      winMessage = "Player 1 has won by score of "+currentPosScore;
-    }else{
       winMessage = "Player 0 has won by score of "+currentPosScore;
+    }else{
+      winMessage = "Player 1 has won by score of "+currentPosScore;
     }
     
     text(winMessage, width/2, height/2); 
