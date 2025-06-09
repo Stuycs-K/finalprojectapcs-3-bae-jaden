@@ -98,6 +98,7 @@ void setup() {
   amp = new Amplitude(this);
   //song play
   randomSongPlay();
+  println("played");
 }
 
 void cleanUp(){
