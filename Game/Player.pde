@@ -61,6 +61,7 @@ public class Player{
     }else if (players[(player + 1) % 2].fakeOut == true){
       players[(player + 1) % 2].fakeOut = false;
       currentPosScore += Math.pow(-1, (player + 1) % 2);
+      hit.play();
     }else{
       vulnerable = true;
       lastVulnerable = (int) musicTime;
