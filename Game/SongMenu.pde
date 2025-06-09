@@ -59,7 +59,9 @@ public class SongMenu{
   }
   
   void screenRenderMenu(){//set up the main menu
-  
+    tint(255, 255);
+    imageMode(CENTER);
+    textAlign(CORNER);
     float adjustment = (volume / 4) + 1;
     smoothedAdjustment = lerp(smoothedAdjustment, adjustment, 0.2);
     

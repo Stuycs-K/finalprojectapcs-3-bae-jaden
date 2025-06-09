@@ -66,6 +66,8 @@ public class CharSelectionScreen{
   }
   
   void screenRenderMenu(){//set up the main menu
+    strokeWeight(1);
+  
     float adjustment = (volume / 12) + 1;
     smoothedAdjustment = lerp(smoothedAdjustment, adjustment, 0.2);
     

@@ -112,8 +112,9 @@ void cleanUp(){
   currentPosScore = 0;
   currentTransitionScreen = new TransitionScreen();
   
-  if (mapSound != null && mapSound.isPlaying()) {
+  if (mapSound != null) {
     mapSound.stop();
+    mapSound = null;
   }
   noteReader = null;
   players = null;
@@ -128,7 +129,7 @@ void loadGame(){
   noteReader = new ArrayDeque<>();
     try {
       File file = new File(dataPath(Songscreen.ChosenSong[1]));
-      mapSound = new SoundFile(this, Songscreen.ChosenSong[2]);
+      
       metronomeTick = new SoundFile(this, "metronomeTick.mp3");
       Scanner input = new Scanner(file, "UTF-8");
       System.out.println(file.exists());
@@ -170,6 +171,12 @@ void loadGame(){
         
       }
       
+      if (mapSound != null) {
+        mapSound.stop();
+        mapSound = null;
+      }
+      
+      mapSound = new SoundFile(this, Songscreen.ChosenSong[2]);
       mapSound.play();
       startTime = millis();
       input.close();

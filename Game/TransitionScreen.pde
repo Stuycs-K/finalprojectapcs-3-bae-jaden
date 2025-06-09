@@ -1,5 +1,5 @@
 public class TransitionScreen{
-  int life = 60;
+  int life = 10;
   void render(){
     background(0);
     textSize(40);
