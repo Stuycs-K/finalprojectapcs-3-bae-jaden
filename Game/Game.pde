@@ -6,8 +6,6 @@ import java.io.FileNotFoundException;
 
 SoundFile mapSound;
 SoundFile metronomeTick;
-SoundFile bell;
-SoundFile hit;
 
 Deque<int[]> noteReader;
 int posOffset;
@@ -83,9 +81,6 @@ void setup() {
   currentTransitionScreen = new TransitionScreen();
   currentConfettiManager = new ConfettiManager();
   currentTitleScreen = new TitleScreen();
-  
-  bell = new SoundFile(this, "Assets/sfx.bell.mp3");
-  hit = new SoundFile(this, "Assets/sfx.punch.mp3");
   
   currentMenu = "TitleScreen";
   //assetsLoad
@@ -245,7 +240,6 @@ void draw() {
     }else{
       winMessage = "Player 1 has won by score of "+currentPosScore;
     }
-    bell.play();
     text(winMessage, width/2, height/2); 
     return;
   }
