@@ -13,11 +13,6 @@ public class TitleScreen{
     float adjustment = (volume / 4) + 0.825;
     smoothedAdjustment = lerp(smoothedAdjustment, adjustment, 0.2);
     
-    println(smoothedAdjustment);
-    if (smoothedAdjustment > 1.05){
-     currentConfettiManager.spawnBurst(100, color(88,29,255)); 
-      
-    }
     smoothedAdjustment1 = lerp(smoothedAdjustment1, adjustment, 0.1);
     
     image(background, width / 2, height / 2);

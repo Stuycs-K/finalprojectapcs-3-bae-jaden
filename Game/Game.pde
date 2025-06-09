@@ -55,6 +55,12 @@ float volume = 0;
 ConfettiManager currentConfettiManager;
 
 void randomSongPlay(){
+  if (mapSound != null){
+    mapSound.stop();
+    mapSound = null;
+    amp.input(null);
+  }
+  
  int randomIndexSong = (int)(Math.random() * Songscreen.ListOfSong.size());
   mapSound = new SoundFile(this, Songscreen.ListOfSong.get(randomIndexSong)[2]);
   mapSound.play(); 
@@ -69,7 +75,7 @@ void setup() {
   posOffset = (width / 2);
   gameEnd = false;
   gameActive = false;
-  Songscreen = new SongMenu();
+  Songscreen = new SongMenu(this);
   charscreen = new CharSelectionScreen();
   currentTransitionScreen = new TransitionScreen();
   currentConfettiManager = new ConfettiManager();
