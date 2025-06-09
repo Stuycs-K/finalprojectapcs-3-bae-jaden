@@ -145,7 +145,7 @@ void loadGame(){
           BPM = Math.round(60000 / parseFloat(timingData[1]));
           println(tickInterval, BPM);  
           appearanceTime = tickInterval * 2;
-          validTime = appearanceTime / 5;
+          validTime = appearanceTime / 4;
         }
         
         
