@@ -269,7 +269,9 @@ void draw() {
 }
 
 void keyPressed() {
-  
+  if(currentTransitionScreen != null && currentTransitionScreen.life > 0){
+    return;
+  }
   if (gameActive == false){
     if (currentMenu.equals("TitleScreen")){
       currentMenu = "SongScreen";
