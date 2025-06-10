@@ -50,6 +50,10 @@ Players will play as ghost fighter or demon boxer and fight till one KO's one an
 
 ## Detailed Documentation
 
+### DEMO VID
+
+DEMO VID: https://youtu.be/HdxLtoUSt6U?si=h5c0H_DvfhBnBsVs
+
 ### Title screen
 
 When you first play the game, you will be introduced with fancy title screen. You can press any button to continue. 

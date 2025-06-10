@@ -2,9 +2,7 @@ public class SongMenu{
   ArrayList<String[]> ListOfSong = new ArrayList<String[]>(); //"SongName, mapdirectory, musicdirectory"
   int currentIndexSong;
   String[] ChosenSong;
-  
-  String player1Character = "Char1";
-  String player2Character = "Char2";
+
   
   PImage background, Screen, Frame, Gargoyle;
   

@@ -123,7 +123,7 @@ void cleanUp(){
 }
 void loadGame(){
   gameEnd = false;
-  players = new Player[] {new Player(0, keys1, Songscreen.player1Character), new Player(1, keys2, Songscreen.player2Character)}; 
+  players = new Player[] {new Player(0, keys1, charscreen.player0Character), new Player(1, keys2, charscreen.player1Character)}; 
   currentCamera = new Camera();
   currentBackground = new Background();
   currentDangerScreen = new DangerScreen();

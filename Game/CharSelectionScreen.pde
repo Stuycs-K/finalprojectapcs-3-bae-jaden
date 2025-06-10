@@ -14,11 +14,16 @@ public class CharSelectionScreen{
   float smoothedAdjustment = 1.0;
   float smoothedAdjustment1 = 1.0;
   
+  String player0Character = "Char1";
+  String player1Character = "Char2";
+  
   void bind(int playerindex, int charindex){
     if (playerindex == 0){
       if (player0currentIndex != player1chosenIndex){
         println("player " + playerindex + " chose " + ListOfCharacter.get(charindex)[0]);
         player0chosenIndex = charindex;
+        println("Selected Character: " + ListOfCharacter.get(charindex));
+        player0Character = ListOfCharacter.get(charindex)[0];
         setImage(ListOfCharacter.get(charindex)[0], 0);
       }
       
@@ -26,6 +31,8 @@ public class CharSelectionScreen{
       if (player1currentIndex != player0chosenIndex){
         println("player " + playerindex + " chose " + ListOfCharacter.get(charindex)[0]);
         player1chosenIndex = charindex;
+        println(ListOfCharacter.get(charindex)[0]);
+        player1Character = ListOfCharacter.get(charindex)[0];
         setImage(ListOfCharacter.get(charindex)[0], 1);
       }
     }
