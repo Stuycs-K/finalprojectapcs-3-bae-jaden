@@ -1,7 +1,11 @@
+![alt text](play.gif)
+
 # Underworld's Beatboxing
 *Two player taiko-style arcade game (Local multiplayer)*
 
 Have you ever played pvp rhythm games and was sad that there wasn't any player interactions? It says its pvp but its not really pvp cause all you do is just press the button based on map. The game is not dynamic enough to be considered pvp. Well here is the game for you: inspired by arcade style taiko and fighting game, Underworld's Beatboxing offers dynamic interaction into boring traditional rhythm PVP genre!
+
+![alt text](title.png)
 
 ## Overview
 
@@ -10,6 +14,8 @@ It is 2025 and the popularity of human musics has spread across the world connec
 Players will play as ghost fighter or demon boxer and fight till one KO's one another. Good reaction speed will help you catch mistake that opponent makes and give a strong punch that will allow you to claim a space. First player to push opponent onto end of stage will KO the opponent and take the victory.
 
 ---
+
+![alt text](gameplay.png)
 
 ## Controls
 
@@ -39,6 +45,8 @@ Players will play as ghost fighter or demon boxer and fight till one KO's one an
   - Attack: `K`  
 
 ---
+
+![alt text](details.png)
 
 ## Detailed Documentation
 
@@ -83,9 +91,13 @@ Win message is displayed and the screen will go back to song picking menu.
 
 ---
 
+![alt text](credit.png)
+
 ## Credits
 
 Game concept / development by **OPM games** 
 
 Music used are property of their respective owners.
 Assets belong to **OPM games**
+
+![alt text](opm.png)
